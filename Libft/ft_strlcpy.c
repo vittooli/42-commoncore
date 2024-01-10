@@ -23,7 +23,7 @@ int	ft_strlcpy(char *restrict dst, const char *restrict src, size_t dstsize)
 	i = 0;
 	if (dstsize != 0)
 	{
-		while (i < dstsize)
+		while (i < dstsize - 1)
 		{
 			dst[i] = src[i];
 			i++;
@@ -35,12 +35,14 @@ int	ft_strlcpy(char *restrict dst, const char *restrict src, size_t dstsize)
 
 int	main()
 {
-	char	dst[] = "cane";
+	char	dst[5];
 	char	src[] = "ciao";
 	size_t	i = 3;
 
 
-	printf("%d", ft_strlcpy(dst, src, i));
-	printf("%lu",strlen(src));
-	printf("%lu", strlcpy(dst, src, i));
+	ft_strlcpy(dst, src, i);
+	printf("ft_strlcpy: %s\n", dst);
+	
+	strlcpy(dst, src, i);
+	printf("strlcpy: %s", dst);
 }
