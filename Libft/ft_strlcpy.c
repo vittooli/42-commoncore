@@ -14,7 +14,7 @@
 #include <string.h>
 #include "libft.h"
 
-int	ft_strlcpy(char *restrict dst, const char *restrict src, size_t dstsize)
+int	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
 	size_t	i;
 	int srcsize;
@@ -33,7 +33,7 @@ int	ft_strlcpy(char *restrict dst, const char *restrict src, size_t dstsize)
 	return (srcsize);
 }
 
-int	main()
+/*int	main()
 {
 	char	dst[5];
 	char	src[] = "ciao";
@@ -45,4 +45,4 @@ int	main()
 	
 	strlcpy(dst, src, i);
 	printf("strlcpy: %s", dst);
-}
+}*/

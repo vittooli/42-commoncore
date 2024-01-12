@@ -1,3 +1,4 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -10,7 +11,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-void	*ft_memmove(void *restrict dst, const void *restrict src, size_t len)
+#include <cstddef>
+
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
 	size_t	i;
 	char	*d;

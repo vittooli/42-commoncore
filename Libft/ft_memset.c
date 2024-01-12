@@ -10,15 +10,27 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
 void	*ft_memset(void *str, int c, size_t len)
 {
 	size_t	i;
+	char	*s;
 
 	i = 0;
+	s = (char *)str;
 	while (i < len)
 	{
-		((unsigned char *)str)[i] = c;
+		s[i] = c;
 		i++;
 	}
-	return (b);
+	return (str);
 }
+
+/*int main() 
+{
+    char myArray[10];
+    ft_memset(myArray, 'A', sizeof(myArray));
+    printf("Array dopo l'inizializzazione: %s\n", myArray);
+    return 0;
+}*/
