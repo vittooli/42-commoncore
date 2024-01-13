@@ -6,7 +6,7 @@
 #    By: volivier <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/08 13:35:14 by volivier          #+#    #+#              #
-#    Updated: 2024/01/13 14:07:25 by volivier         ###   ########.fr        #
+#    Updated: 2024/01/13 17:15:57 by volivier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ RM = rm -f
 	$(CC) $(FLAGS) -g -c $< -o $(<:.c=.o)
 
 $(NAME): $(OBJS)
-	ar rcs $(NAME) $(OBJS)
+	ar rc $(NAME) $(OBJS)
 	ranlib $(NAME)
 
 all: $(NAME)

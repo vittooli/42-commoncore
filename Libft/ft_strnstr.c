@@ -6,7 +6,7 @@
 /*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 12:02:11 by volivier          #+#    #+#             */
-/*   Updated: 2024/01/13 14:15:42 by volivier         ###   ########.fr       */
+/*   Updated: 2024/01/13 18:30:25 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,35 +16,22 @@ char	*ft_strnstr(const char *h, const char *n, size_t len)
 {
 	size_t	i;
 	size_t	j;
-	size_t	ptr;
 
 	i = 0;
 	j = 0;
-	ptr = -1;
-	while (n[j] != '\0' && i <= len && j <= len)
+	if (!*n)
+		return ((char *)h);
+	while (h[i])
 	{
-		printf("i: %zu\n",i);
-		if (h[i] == n[j])
+		j = 0;
+		while (h[i] == n[j] && h[i] && i < len)
 		{
-			ptr = i;
-			j = 0;
-			while (h[i] == n[j])
-			{
-				i++;
-				j++;
-			}
-		}
-		else
 			i++;
-		printf("j: %zu\n",j);
-		if ((int)j == ft_strlen((char *)n))
-			return ((char *)&h[ptr]);
+			j++;
+		}
+		if (!n[j])
+			return ((char *)&h[i - j]);
+		i = i - j + 1;
 	}
 	return (NULL);
 }
-
-/*int	main()
-{
-	printf("%p", ft_strnstr("casalale", "le", 8));
-	return(0);
-}*/

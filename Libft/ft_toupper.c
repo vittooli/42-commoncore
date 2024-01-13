@@ -6,21 +6,15 @@
 /*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 12:02:58 by volivier          #+#    #+#             */
-/*   Updated: 2024/01/13 12:03:03 by volivier         ###   ########.fr       */
+/*   Updated: 2024/01/13 15:26:13 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_toupper(int c)
+int	ft_toupper(int c)
 {
-    if (c >= 97 && c <= 122)
-        c = c - 32;
-    return (c);
+	if (c >= 97 && c <= 122)
+		c = c - 32;
+	return (c);
 }
-
-/*int main()
-{
-    printf("%d",toupper('a'));
-    return(0);
-}*/

@@ -6,7 +6,7 @@
 /*   By: volivier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:45:00 by volivier          #+#    #+#             */
-/*   Updated: 2024/01/13 11:24:16 by volivier         ###   ########.fr       */
+/*   Updated: 2024/01/13 16:14:07 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,3 @@ void	*ft_memset(void *str, int c, size_t len)
 	}
 	return (str);
 }
-
-/*int main() 
-{
-    char myArray[10];
-    ft_memset(myArray, 'A', sizeof(myArray));
-    printf("Array dopo l'inizializzazione: %s\n", myArray);
-    return 0;
-}*/
