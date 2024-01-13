@@ -1,17 +1,16 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: volivier <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/09 17:15:39 by volivier          #+#    #+#             */
-/*   Updated: 2024/01/09 17:15:47 by volivier         ###   ########.fr       */
+/*   Created: 2024/01/13 13:02:52 by volivier          #+#    #+#             */
+/*   Updated: 2024/01/13 13:05:07 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cstddef>
+#include "libft.h"
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
@@ -19,11 +18,23 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	char	*d;
 	char	*s;
 
-	i = -1;
+	if (dst == NULL || src == NULL)
+		return (NULL);
+	i = 0;
 	d = (char *)dst;
 	s = (char *)src;
-	while(i++ < len)
-		d[i] = s[i];
-	d[i] = '\0';
+	if (d < s)
+	{
+		while (i < len)
+		{
+			d[i] = s[i];
+			i++;
+		}
+	}
+	else
+	{
+		while (len--)
+			d[len] = s[len];
+	}
 	return (dst);
 }

@@ -6,11 +6,11 @@
 /*   By: volivier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 15:37:34 by volivier          #+#    #+#             */
-/*   Updated: 2024/01/09 15:45:27 by volivier         ###   ########.fr       */
+/*   Updated: 2024/01/13 11:53:30 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "libft.h"
 
 void	ft_bzero(void *str, size_t len)
 {

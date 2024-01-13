@@ -1,15 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/13 12:01:03 by volivier          #+#    #+#             */
+/*   Updated: 2024/01/13 14:08:25 by volivier         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 int	ft_memcmp(const void *str1, const void *str2, size_t n)
 {
-	size_t	i;
-	char	*s1;
-	char	*s2;
+	size_t			i;
+	unsigned char	*s1;
+	unsigned char	*s2;
 
-	s1 = (char *)str1;
-	s2 = (char *)str2;
+	s1 = (unsigned char *)str1;
+	s2 = (unsigned char *)str2;
 	i = 0;
-	while (i < n && (s1[i] != '\0' || s2[i] != '\0'))
+	while (i < n)
 	{
 		if (s1[i] > s2[i])
 			return (1);
@@ -18,10 +30,4 @@ int	ft_memcmp(const void *str1, const void *str2, size_t n)
 		i++;
 	}
 	return (0);
-}
-
-int	main()
-{
-	printf("%d", ft_memcmp("car", "car", 3));
-	return(0);
 }

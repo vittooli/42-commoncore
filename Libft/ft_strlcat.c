@@ -1,38 +1,36 @@
-#include <string.h>
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/13 12:01:50 by volivier          #+#    #+#             */
+/*   Updated: 2024/01/13 15:00:40 by volivier         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int ft_strlcat(char * restrict dst, const char * restrict src, size_t dstsize)
+#include "libft.h"
+
+int	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
-    size_t  d;
-    size_t  s;
-    int srcsize;
-    int dLen;
+	size_t	d;
+	size_t	s;
+	int		srcsize;
+	size_t	d_len;
 
-    dLen = strlen(dst);
-    d = dLen;
-    printf("%zu\n",d);
-    s = 0;
-    while (src[s] != '\0' && d + 1 < dstsize)
-    {
-        dst[d] = src[s];
-        s++;
-        d++;
-    }
-    dst[d] = '\0';
-    srcsize = strlen(src);
-    printf("%d\n", srcsize);
-    return(dLen + srcsize);
+	d_len = ft_strlen((char *)dst);
+	d = d_len;
+	s = 0;
+	if (dstsize < d_len)
+		return (ft_strlen((char *)src) + dstsize);
+	while (src[s] != '\0' && d + 1 < dstsize)
+	{
+		dst[d] = src[s];
+		s++;
+		d++;
+	}
+	dst[d] = '\0';
+	srcsize = ft_strlen((char *)src);
+	return (d_len + srcsize);
 }
-
-/*int main() 
-{
-    char destination[20] = "";
-    const char *source = "world!";
-
-    size_t result = strlcat(destination, source, sizeof(destination));
-
-    printf("Concatenated string: %s\n", destination);
-    printf("Total length: %zu\n", result);
-
-    return 0;
-}*/
