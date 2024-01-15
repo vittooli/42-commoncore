@@ -43,4 +43,5 @@ char    *ft_strchr(const char *s, int c);
 char    *ft_strrchr(const char *s, int c);
 char	*ft_strnstr(const char *h, const char *n, size_t len);
 char	*ft_strdup(const char *src);
+char	*ft_strjoin(char const *s1, char const *s2);
 #endif
