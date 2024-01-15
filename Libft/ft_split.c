@@ -1,97 +1,105 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: volivier <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/15 11:15:13 by volivier          #+#    #+#             */
+/*   Updated: 2024/01/15 14:16:22 by volivier         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-int	ft_find_split(char const *s, char c, int i) 
-//i è l'indice da cui inizia a scorrere la stringa
+int	ft_find_start(char const *s, char c, int i)
 {
-	while(s[i])
+	while (s[i] != '\0')
 	{
-		if (s[i] == c && s[i + 1] != c) 
+		if (s[i] != c && (s[i - 1] == c || i == 0))
 			return (i);
 		i++;
 	}
-	return(i);
-//restituisce la posizione in cui si trova il carattere che segna lo split
+	return (i);
 }
 
-/*-----------------------------------------------------------------*/
+int	ft_find_end(char const *s, char c, int i)
+{
+	while (s[i] != '\0')
+	{
+		if (s[i] != c && (s[i + 1] == c || s[i + 1] == '\0'))
+			return (i);
+		i++;
+	}
+	return (i);
+}
 
 int	ft_count_words(char const *s, char c)
 {
 	int	i;
-	int	words;
-	
+	int	count;
+
 	i = 0;
-	words = 0;
-	while (s[i])
+	count = 0;
+	while (s[i] != '\0')
 	{
-		i = ft_find_split(s, c, i);
-		words++;
+		if (s[i] != c && (s[i + 1] == c || s[i + 1] == '\0'))
+			count++;
 		i++;
 	}
-	if (s[i - 1] == c)
-		words-= 1;
-	printf("%d\n",words);
-	return (words);
+	return (count);
 }
-
-/*-----------------------------------------------------------------
 
 char	*ft_alloc(char const *s, int start, int end)
 {
-	int	i;
+	int		i;
 	char	*str;
 
 	i = 0;
-	str = (char *)malloc(sizeof(*s) * (end - start +1));
-	while(i <= (end - start))
+	str = (char *)malloc(sizeof(*s) * (end - start + 1));
+	while (i <= (end - start))
 	{
-		str[i] = s[i];
+		str[i] = s[start + i];
 		i++;
 	}
-	printf("%s\n",str);
 	return (str);
 }
 
-*----------------------------------------------------------------
-
 char	**ft_split(char const *s, char c)
 {
-	int	i;
-	int	start;
-	int	end;
-	char **arr;
-	
+	int		i;
+	int		start;
+	int		end;
+	char	**arr;
+
 	arr = (char **)malloc(sizeof(s) * (ft_count_words(s, c) + 1));
-	if (!arr) 
+	if (!arr)
 		return (NULL);
 	i = 0;
-	start = 0;
-	while (arr[i])
+	start = ft_find_start(s, c, 0);
+	while (i < ft_count_words(s, c))
 	{
-		end = ft_find_split(s, c, start);
-		if (end != 0)
-			arr[i] = ft_alloc(s, start, end);
-		start = end + 1;
+		end = ft_find_end(s, c, start);
+		arr[i] = ft_alloc(s, start, end);
+		start = ft_find_start(s, c, end + 1);
 		i++;
 	}
-	arr[i] = NULL; 
+	arr[i] = NULL;
 	return (arr);
 }
 
-*---------------------------------------------------------------*/
-
 int	main()
 {
-	//int	i;
-	//char **arr;
+	int i;
+	char **arr;
 
-	//i = 0;
-	//arr = ft_split("lorem ipsum dolor sit amet", ' ');
-	/*while(arr[i])
+	i = 0;
+	arr = ft_split("lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse", ' ');
+	while (arr[i])
 	{
-		printf("%s", arr[i]);
+		printf("%s\n", arr[i]);
 		i++;
-	}*/
-	printf("%d", ft_count_words(" lorem ipsum dolor sit  amet ", ' '));
-	return (0);
+	}
+	return(0);
 }
+

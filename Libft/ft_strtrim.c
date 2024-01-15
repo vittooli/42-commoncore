@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: volivier <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/15 11:15:34 by volivier          #+#    #+#             */
+/*   Updated: 2024/01/15 12:00:09 by volivier         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "libft.h"
 
@@ -6,7 +17,7 @@ int	ft_c_in_set(char c, char const *set)
 	int	i;
 
 	i = 0;
-	while(set[i])
+	while (set[i])
 	{
 		if (c == set[i])
 			return (1);
@@ -37,10 +48,4 @@ char	*ft_strtrim(char const *s1, char const *set)
 		str[i++] = s1[start++];
 	str[i] = '\0';
 	return (str);
-}
-
-int	main()
-{
-	printf("%s", ft_strtrim("            ", " "));
-	return (0);
 }
