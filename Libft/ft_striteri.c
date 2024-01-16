@@ -1,33 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/13 12:01:03 by volivier          #+#    #+#             */
-/*   Updated: 2024/01/16 17:45:59 by volivier         ###   ########.fr       */
+/*   Created: 2024/01/16 12:12:50 by volivier          #+#    #+#             */
+/*   Updated: 2024/01/16 17:22:58 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_memcmp(const void *s1, const void *s2, size_t n)
+void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
-	unsigned char	*s1_ptr;
-	unsigned char	*s2_ptr;
-	size_t			i;
+	int	i;
 
-	i = 0;
-	s1_ptr = (unsigned char *)s1;
-	s2_ptr = (unsigned char *)s2;
-	if (n == 0)
-		return (0);
-	while (s1_ptr[i] && s2_ptr[i] && i < n - 1)
-	{
-		if (s1_ptr[i] != s2_ptr[i])
-			return (s1_ptr[i] - s2_ptr[i]);
-		i++;
-	}
-	return (s1_ptr[i] - s2_ptr[i]);
+	if (s == NULL || f == NULL)
+		return ;
+	i = -1;
+	while (s[++i])
+		f(i, &s[i]);
 }

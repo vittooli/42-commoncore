@@ -3,25 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: volivier <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 17:26:34 by volivier          #+#    #+#             */
-/*   Updated: 2024/01/15 18:53:38 by volivier         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:07:30 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_len_int(int n, int base)
+int	ft_len_int(long n)
 {
 	int	count;
 
 	count = 0;
-	if (n <= 0)
+	if (n == 0)
+		return (1);
+	if (n < 0)
+	{
 		count++;
+		n *= -1;
+	}
 	while (n)
 	{
-		n = n / base;
+		n = n / 10;
 		count++;
 	}
 	return (count);
@@ -31,32 +36,27 @@ char	*ft_itoa(int n)
 {
 	int		len;
 	char	*ret;
-	const char	*digits = "0123456789";
+	long	nbr;
 
-	len = ft_len_int(n, 10);
-	ret = malloc(sizeof(char) * (len + 1));
+	nbr = (long)n;
+	len = ft_len_int(nbr);
+	ret = (char *)malloc(sizeof(char) * (len + 1));
 	if (!ret)
-		printf("%s", "ff");
 		return (NULL);
 	ret[len] = '\0';
-	if (n == 0)
+	if (nbr == 0)
 		ret[0] = '0';
-	if (n < 0)
-		ret[0] = '-';
-	while (n)
+	if (nbr == -2147483648)
+		return (ft_strdup("-2147483648"));
+	if (nbr < 0)
 	{
-		if (n > 0)
-			ret[len--] = digits[n % 10];
-		else
-			ret[len--] = digits[n % 10 * -1];
-		n = n / 10;
-		//printf("%s", ret);
+		ret[0] = '-';
+		nbr *= -1;
+	}
+	while (nbr && len--)
+	{
+		ret[len] = (nbr % 10 + '0');
+		nbr = nbr / 10;
 	}
 	return (ret);
-}
-
-int	main()
-{
-	printf("%s", ft_itoa(12345));
-	return (0);
 }

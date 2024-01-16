@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: volivier <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 11:15:13 by volivier          #+#    #+#             */
-/*   Updated: 2024/01/15 14:16:22 by volivier         ###   ########.fr       */
+/*   Updated: 2024/01/16 18:52:46 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_find_start(char const *s, char c, int i)
 {
-	while (s[i] != '\0')
+	while (i >= 0 && s[i] != '\0')
 	{
 		if (s[i] != c && (s[i - 1] == c || i == 0))
 			return (i);
@@ -25,7 +25,7 @@ int	ft_find_start(char const *s, char c, int i)
 
 int	ft_find_end(char const *s, char c, int i)
 {
-	while (s[i] != '\0')
+	while (i >= 0 && s[i] != '\0')
 	{
 		if (s[i] != c && (s[i + 1] == c || s[i + 1] == '\0'))
 			return (i);
@@ -56,7 +56,9 @@ char	*ft_alloc(char const *s, int start, int end)
 	char	*str;
 
 	i = 0;
-	str = (char *)malloc(sizeof(*s) * (end - start + 1));
+	str = (char *)malloc(sizeof(char) * (end - start + 1));
+	if (str == NULL)
+		return (NULL);
 	while (i <= (end - start))
 	{
 		str[i] = s[start + i];
@@ -73,7 +75,7 @@ char	**ft_split(char const *s, char c)
 	char	**arr;
 
 	arr = (char **)malloc(sizeof(s) * (ft_count_words(s, c) + 1));
-	if (!arr)
+	if (arr == NULL)
 		return (NULL);
 	i = 0;
 	start = ft_find_start(s, c, 0);
@@ -81,25 +83,11 @@ char	**ft_split(char const *s, char c)
 	{
 		end = ft_find_end(s, c, start);
 		arr[i] = ft_alloc(s, start, end);
+		if (arr[i] == NULL)
+			return (NULL);
 		start = ft_find_start(s, c, end + 1);
 		i++;
 	}
-	arr[i] = NULL;
+	arr[i] = 0;
 	return (arr);
 }
-
-int	main()
-{
-	int i;
-	char **arr;
-
-	i = 0;
-	arr = ft_split("lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse", ' ');
-	while (arr[i])
-	{
-		printf("%s\n", arr[i]);
-		i++;
-	}
-	return(0);
-}
-

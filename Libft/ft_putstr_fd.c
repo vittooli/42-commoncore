@@ -1,33 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/13 12:01:03 by volivier          #+#    #+#             */
-/*   Updated: 2024/01/16 17:45:59 by volivier         ###   ########.fr       */
+/*   Created: 2024/01/16 12:15:25 by volivier          #+#    #+#             */
+/*   Updated: 2024/01/16 12:51:41 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_memcmp(const void *s1, const void *s2, size_t n)
+void	ft_putstr_fd(char *s, int fd)
 {
-	unsigned char	*s1_ptr;
-	unsigned char	*s2_ptr;
-	size_t			i;
-
-	i = 0;
-	s1_ptr = (unsigned char *)s1;
-	s2_ptr = (unsigned char *)s2;
-	if (n == 0)
-		return (0);
-	while (s1_ptr[i] && s2_ptr[i] && i < n - 1)
+	while (s && *s)
 	{
-		if (s1_ptr[i] != s2_ptr[i])
-			return (s1_ptr[i] - s2_ptr[i]);
-		i++;
+		ft_putchar_fd(*s, fd);
+		s++;
 	}
-	return (s1_ptr[i] - s2_ptr[i]);
 }

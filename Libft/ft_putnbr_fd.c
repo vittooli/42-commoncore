@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/13 12:01:03 by volivier          #+#    #+#             */
-/*   Updated: 2024/01/16 17:45:59 by volivier         ###   ########.fr       */
+/*   Created: 2024/01/16 12:30:21 by volivier          #+#    #+#             */
+/*   Updated: 2024/01/16 12:54:13 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_memcmp(const void *s1, const void *s2, size_t n)
+void	ft_putnbr_fd(int n, int fd)
 {
-	unsigned char	*s1_ptr;
-	unsigned char	*s2_ptr;
-	size_t			i;
+	unsigned int	nbr;
 
-	i = 0;
-	s1_ptr = (unsigned char *)s1;
-	s2_ptr = (unsigned char *)s2;
-	if (n == 0)
-		return (0);
-	while (s1_ptr[i] && s2_ptr[i] && i < n - 1)
+	if (n < 0)
 	{
-		if (s1_ptr[i] != s2_ptr[i])
-			return (s1_ptr[i] - s2_ptr[i]);
-		i++;
+		nbr = (unsigned int)n * -1;
+		ft_putchar_fd('-', fd);
 	}
-	return (s1_ptr[i] - s2_ptr[i]);
+	else
+		nbr = (unsigned int)n;
+	if (nbr >= 10)
+		ft_putnbr_fd(nbr / 10, fd);
+	ft_putchar_fd((nbr % 10 + 48), fd);
 }

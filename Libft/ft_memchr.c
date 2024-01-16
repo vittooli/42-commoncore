@@ -6,7 +6,7 @@
 /*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 11:03:47 by volivier          #+#    #+#             */
-/*   Updated: 2024/01/13 14:12:53 by volivier         ###   ########.fr       */
+/*   Updated: 2024/01/16 16:13:04 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ void	*ft_memchr(const void *s, int c, size_t n)
 
 	str = (char *)s;
 	i = 0;
-	if (s == NULL)
-		return (NULL);
 	while (i < n)
 	{
 		if (str[i] == c)
