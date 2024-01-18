@@ -75,7 +75,7 @@ char	**ft_split(char const *s, char c)
 	char	**arr;
 
 	arr = (char **)malloc(sizeof(s) * (ft_count_words(s, c) + 1));
-	if (arr == NULL)
+	if (arr == NULL || s == NULL)
 		return (NULL);
 	i = 0;
 	start = ft_find_start(s, c, 0);
