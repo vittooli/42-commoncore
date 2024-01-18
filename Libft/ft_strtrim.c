@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: volivier <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 11:15:34 by volivier          #+#    #+#             */
-/*   Updated: 2024/01/15 12:00:09 by volivier         ###   ########.fr       */
+/*   Updated: 2024/01/18 16:59:37 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 	char	*str;
 
 	i = 0;
+	if (!s1 || !set)
+		return (NULL);
 	while (s1[i] && ft_c_in_set(s1[i], set))
 		i++;
 	start = i;
