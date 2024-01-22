@@ -44,6 +44,7 @@ all: $(NAME)
 
 clean:
 	$(RM) $(OBJS)
+	$(RM) $(OBJB)
 
 fclean: clean
 	$(RM) $(NAME) $(OBJB)
