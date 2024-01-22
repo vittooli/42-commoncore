@@ -6,7 +6,7 @@
 /*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 12:02:01 by volivier          #+#    #+#             */
-/*   Updated: 2024/01/13 18:50:42 by volivier         ###   ########.fr       */
+/*   Updated: 2024/01/20 17:34:02 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,4 @@ int	ft_strncmp(const char *s1, const char *s2, int n)
 	if (n)
 		return (*ptr1 - *ptr2);
 	return (0);
-
 }
