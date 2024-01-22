@@ -25,7 +25,6 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
-//dichiarazione dei prototipi
 void	ft_bzero(void *str, size_t len);
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);
