@@ -6,7 +6,7 @@
 /*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 19:12:37 by volivier          #+#    #+#             */
-/*   Updated: 2024/01/26 19:04:03 by volivier         ###   ########.fr       */
+/*   Updated: 2024/01/27 00:43:55 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ int	ft_putnbr(int nb)
 	}
 	else if (nb < 0)
 	{
-		i += ft_putchar('-');
-		ft_putnbr(-nb);
+		ft_putchar('-');
+		i += ft_putnbr(-nb);
 	}
 	else if (nb >= 10)
 	{
-		ft_putnbr(nb / 10);
-		ft_putnbr(nb % 10);
+		i += ft_putnbr(nb / 10);
+		i += ft_putnbr(nb % 10);
 	}
 	else
 		i += ft_putchar(nb + 48);
@@ -46,10 +46,44 @@ int ft_put_unsigned(unsigned int nb)
 	i = 0;
 	if (nb >= 10)
 	{
-		ft_put_unsigned(nb / 10);
-		ft_put_unsigned(nb % 10);
+		i += ft_put_unsigned(nb / 10);
+		i += ft_put_unsigned(nb % 10);
 	}
 	else
 		i += ft_putchar(nb + 48);
+	return (i);
+}
+
+int	ft_lowhex(unsigned long int nb)
+{
+	int 	i;
+	char	*string;
+	
+	i = 0;
+	string = "0123456789abcdef";
+	if (nb >= 16)
+	{
+		i += ft_lowhex(nb / 16);
+		i += ft_lowhex(nb % 16);
+	}
+	else
+		i += ft_putchar(string[nb]);
+	return (i);
+}
+
+int	ft_uphex(unsigned long int nb)
+{
+	int 	i;
+	char	*string;
+	
+	i = 0;
+	string = "0123456789ABCDEF";
+	if (nb >= 16)
+	{
+		i += ft_uphex(nb / 16);
+		i += ft_uphex(nb % 16);
+	}
+	else
+		i += ft_putchar(string[nb]);
 	return (i);
 }
