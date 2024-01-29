@@ -6,11 +6,11 @@
 /*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 15:51:18 by volivier          #+#    #+#             */
-/*   Updated: 2024/01/27 00:49:03 by volivier         ###   ########.fr       */
+/*   Updated: 2024/01/29 11:17:09 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 #include <stdio.h>
 
 int	ft_put_args(char type, va_list *args)
@@ -22,15 +22,15 @@ int	ft_put_args(char type, va_list *args)
 	else if (type == 's')
 		return (ft_putstr((char *)va_arg(*args, char *)));
 	else if (type == 'p')
-		return (ft_pointer(va_arg(*args, unsigned long int)));
+		return (ft_pointer(va_arg(*args, void *)));
 	else if (type == 'd' || type == 'i')
 		return (ft_putnbr(va_arg(*args, int)));
 	else if (type == 'u')
 		return (ft_put_unsigned(va_arg(*args, unsigned int)));
 	else if (type == 'x')
-		return (ft_lowhex(va_arg(*args, unsigned long int)));
+		return (ft_lowhex(va_arg(*args, unsigned int)));
 	else if (type == 'X')
-		return (ft_uphex(va_arg(*args, unsigned long int)));
+		return (ft_uphex(va_arg(*args, unsigned int)));
 	return(0);
 }
 

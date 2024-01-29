@@ -1,41 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pointer.c                                       :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/24 15:25:18 by volivier          #+#    #+#             */
-/*   Updated: 2024/01/29 11:15:13 by volivier         ###   ########.fr       */
+/*   Created: 2024/01/23 15:52:44 by volivier          #+#    #+#             */
+/*   Updated: 2024/01/29 11:01:12 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include <stdio.h>
+#ifndef PRINTF_H
+# define PRINTF_H
 
-int	ft_len(unsigned long n)
-{
-	int	count;
+#include <stdarg.h>
+#include <unistd.h>
 
-	count = 0;
-	if (n == 0)
-		return (1);
-	if (n < 0)
-	{
-		count++;
-		n *= -1;
-	}
-	while (n)
-	{
-		n = n / 16;
-		count++;
-	}
-	return (count);
-}
+int	ft_printf(const char *format, ...);
+int	ft_putchar(char c);
+int	ft_putstr(char *str);
+int	ft_putnbr(int nb);
+int ft_put_unsigned(unsigned int nb);
+int	ft_lowhex(unsigned long nb);
+int	ft_uphex(unsigned long nb);
+int	ft_pointer(void *pointer);
 
-int	ft_pointer(void *pointer)
-{
-	write(1, "0x", 2);
-	ft_lowhex((unsigned long int)(pointer));
-	return (ft_len((unsigned long int)(pointer)) + 2);
-}
+#endif

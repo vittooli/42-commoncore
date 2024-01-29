@@ -6,7 +6,7 @@
 #    By: volivier <volivier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/26 19:36:19 by volivier          #+#    #+#              #
-#    Updated: 2024/01/27 00:55:24 by volivier         ###   ########.fr        #
+#    Updated: 2024/01/27 16:27:01 by volivier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,8 @@ NAME = libftprintf.a
 
 CC = cc
 FLAGS = -Wall -Wextra -Werror
-MAKEFLAGS+= --silent
-SRCS = ft_numbers.c ft_printf.c ft_putnbr.c ft_put_unsigned.c ft_pointer.c ft_lowhex.c \
-ft_uphex.c ft_putchar.c ft_putstr.c ft_len.c
+// MAKEFLAGS+= --silent
+SRCS = ft_numbers.c ft_printf.c ft_pointer.c ft_putchar.c ft_putstr.c
 
 OBJS = $(SRCS:.c=.o)
 

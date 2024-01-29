@@ -6,11 +6,11 @@
 /*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 19:12:37 by volivier          #+#    #+#             */
-/*   Updated: 2024/01/27 00:43:55 by volivier         ###   ########.fr       */
+/*   Updated: 2024/01/29 11:14:16 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
 int	ft_putnbr(int nb)
 {
@@ -26,7 +26,7 @@ int	ft_putnbr(int nb)
 	}
 	else if (nb < 0)
 	{
-		ft_putchar('-');
+		i += ft_putchar('-');
 		i += ft_putnbr(-nb);
 	}
 	else if (nb >= 10)

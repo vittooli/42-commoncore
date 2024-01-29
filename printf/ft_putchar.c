@@ -6,11 +6,11 @@
 /*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 15:52:37 by volivier          #+#    #+#             */
-/*   Updated: 2024/01/26 18:53:55 by volivier         ###   ########.fr       */
+/*   Updated: 2024/01/27 18:00:53 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
 int	ft_putchar(char c)
 {
