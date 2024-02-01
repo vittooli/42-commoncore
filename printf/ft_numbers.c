@@ -6,7 +6,7 @@
 /*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 19:12:37 by volivier          #+#    #+#             */
-/*   Updated: 2024/01/29 11:14:16 by volivier         ###   ########.fr       */
+/*   Updated: 2024/02/01 10:49:04 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_putnbr(int nb)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (nb == -2147483648)
@@ -39,9 +39,9 @@ int	ft_putnbr(int nb)
 	return (i);
 }
 
-int ft_put_unsigned(unsigned int nb)
+int	ft_put_unsigned(unsigned int nb)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (nb >= 10)
@@ -56,9 +56,9 @@ int ft_put_unsigned(unsigned int nb)
 
 int	ft_lowhex(unsigned long int nb)
 {
-	int 	i;
+	int		i;
 	char	*string;
-	
+
 	i = 0;
 	string = "0123456789abcdef";
 	if (nb >= 16)
@@ -73,9 +73,9 @@ int	ft_lowhex(unsigned long int nb)
 
 int	ft_uphex(unsigned long int nb)
 {
-	int 	i;
+	int		i;
 	char	*string;
-	
+
 	i = 0;
 	string = "0123456789ABCDEF";
 	if (nb >= 16)

@@ -6,7 +6,7 @@
 /*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 15:51:18 by volivier          #+#    #+#             */
-/*   Updated: 2024/01/29 11:17:09 by volivier         ###   ########.fr       */
+/*   Updated: 2024/02/01 10:50:41 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	ft_put_args(char type, va_list *args)
 		return (ft_lowhex(va_arg(*args, unsigned int)));
 	else if (type == 'X')
 		return (ft_uphex(va_arg(*args, unsigned int)));
-	return(0);
+	return (0);
 }
 
 int	ft_printf(const char *format, ...)
@@ -48,9 +48,9 @@ int	ft_printf(const char *format, ...)
 			format++;
 			len += ft_put_args(*format, &args);
 		}
-		else 
+		else
 			len += ft_putchar(*format);
-		format++;	
+		format++;
 	}
 	va_end(args);
 	return (len);
