@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/08 11:47:05 by volivier          #+#    #+#             */
+/*   Updated: 2024/02/08 11:47:07 by volivier         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 char	*ft_update(char *s1, char *s2)
@@ -24,29 +36,28 @@ char	*ft_update(char *s1, char *s2)
 	return (ret);
 }
 
-char	*ft_line(char *save)
+char	*ft_line(char *buff)
 {
 	char	*line;
 	int		i;
 
 	i = 0;
-	if (!save)
+	if (!buff)
 		return (NULL);
-	while (save[i] && save[i] != '\n')
+	while (buff[i] && buff[i] != '\n')
 		i++;
 	line = (char *)malloc(sizeof(char) * (i + 2));
 	if (!line)
 		return (NULL);
 	i = 0;
-	while (save[i])
+	while (buff[i])
 	{
-		if (save[i] == '\n')
+		line[i] = buff[i];
+		if (buff[i] == '\n')
 		{
-			line[i] = save[i];
 			i++;
 			break ;
 		}
-		line[i] = save[i];
 		i++;
 	}
 	line[i] = '\0';
@@ -74,7 +85,7 @@ char	*ft_read(int fd)
 		}
 		buff[bytes_read] = '\0';
 		ret = ft_update(ret, buff);
-		if (ft_strchr(ret, '\n'))
+		if (ft_strchr(ret, '\n')) 
 			break ;
 	}
 	return (ret);
@@ -88,13 +99,20 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 		return (NULL);
-	buff = ft_read(fd); //legge il BUFFER_SIZE (in buff ci sta tutta la riga che comprende nl)
+	if (save != NULL)
+		buff = ft_update(save, ft_read(fd));
+	else
+		buff = ft_read(fd);
 	if (!buff)
 		return (NULL);
-	line = ft_line(buff); //restituisce line (a partire da buff)
-	printf("line: %s\n", line);
-	save = ft_strdup(buff + ft_strlen(line)); //
-	printf("save: %s\n", save);
+	line = ft_line(buff);
+	if (*line == '\0')
+	{
+		free (line);
+		free (buff);
+		return (NULL);
+	}
+	save = ft_strdup(buff + ft_strlen(line));
 	free(buff);
 	return (line);
 }
