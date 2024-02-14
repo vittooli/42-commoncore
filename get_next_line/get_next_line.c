@@ -6,7 +6,7 @@
 /*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 11:47:05 by volivier          #+#    #+#             */
-/*   Updated: 2024/02/08 11:47:07 by volivier         ###   ########.fr       */
+/*   Updated: 2024/02/09 15:42:14 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char	*ft_read(int fd)
 		}
 		buff[bytes_read] = '\0';
 		ret = ft_update(ret, buff);
-		if (ft_strchr(ret, '\n')) 
+		if (ft_strchr(ret, '\n'))
 			break ;
 	}
 	return (ret);
@@ -93,10 +93,12 @@ char	*ft_read(int fd)
 
 char	*get_next_line(int fd)
 {
-	static char	*save = NULL;
-	char		*line = NULL;
-	char		*buff = NULL;
+	static char	*save;
+	char		*line;
+	char		*buff;
 
+	line = NULL;
+	buff = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 		return (NULL);
 	if (save != NULL)

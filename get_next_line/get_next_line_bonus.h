@@ -6,7 +6,7 @@
 /*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 11:41:41 by volivier          #+#    #+#             */
-/*   Updated: 2024/02/08 16:21:11 by volivier         ###   ########.fr       */
+/*   Updated: 2024/02/09 15:34:38 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 #  define BUFFER_SIZE 10
 # endif
 
-#include <stdlib.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <stdio.h>
+# include <stdlib.h>
+# include <fcntl.h>
+# include <unistd.h>
+# include <stdio.h>
 
 char	*get_next_line(int fd);
 int		ft_strlen(const char *s);
