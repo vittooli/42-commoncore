@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gromiti <gromiti@student.42.fr>            +#+  +:+       +#+        */
+/*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/21 21:13:53 by gromiti           #+#    #+#             */
-/*   Updated: 2024/01/21 21:42:58 by gromiti          ###   ########.fr       */
+/*   Created: 2024/01/20 18:38:45 by volivier          #+#    #+#             */
+/*   Updated: 2024/01/20 18:38:47 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,8 @@
 
 void	ft_lstdelone(t_list *lst, void (*del)(void*))
 {
-	if (!del)
+	if (lst == NULL || del == NULL)
 		return ;
-	if (lst)
-	{
-		(*del)(lst->content);
-		free (lst);
-	}
+	del(lst->content);
+	free(lst);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gromiti <gromiti@student.42.fr>            +#+  +:+       +#+        */
+/*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 12:17:47 by gromiti           #+#    #+#             */
-/*   Updated: 2024/01/22 15:56:23 by gromiti          ###   ########.fr       */
+/*   Created: 2024/01/15 11:11:23 by volivier          #+#    #+#             */
+/*   Updated: 2024/01/20 17:35:23 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,17 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*sub;
-	size_t	cont;
-	size_t	i;
+	char	*str;
 
-	cont = 0;
-	i = 0;
 	if (!s)
 		return (NULL);
-	sub = (char *)malloc(sizeof(*s) * len + 1);
-	if (!sub)
+	if (start >= ((unsigned int)ft_strlen((char *)s)))
+		return (ft_strdup(""));
+	if (len > (unsigned int)(ft_strlen((char *)s) - start + 1))
+		len = ft_strlen((char *)s) - start + 1;
+	str = (char *)malloc(sizeof(char) * (len + 1));
+	if (!str)
 		return (NULL);
-	while (s[cont])
-	{
-		if (start <= cont && i < len)
-		{
-			sub[i] = s[cont];
-			i++;
-		}
-		cont++;
-	}
-	sub[i] = '\0';
-	return (sub);
+	ft_strlcpy(str, s + start, len + 1);
+	return (str);
 }

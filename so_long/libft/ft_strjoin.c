@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gromiti <gromiti@student.42.fr>            +#+  +:+       +#+        */
+/*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 12:23:20 by gromiti           #+#    #+#             */
-/*   Updated: 2024/01/22 15:57:07 by gromiti          ###   ########.fr       */
+/*   Created: 2024/01/15 11:15:47 by volivier          #+#    #+#             */
+/*   Updated: 2024/01/20 17:56:40 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,28 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*jp;
-	size_t	cont;
+	char	*str;
+	int		i;
+	int		j;
 
 	if (!s1 || !s2)
 		return (NULL);
-	jp = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
-	if (!jp)
+	str = (char *)malloc((ft_strlen((char *)s1) + ft_strlen((char *)s2) + 1));
+	if (!str)
 		return (NULL);
-	cont = 0;
-	while (*s1)
+	i = 0;
+	while (s1[i])
 	{
-		jp[cont] = *s1;
-		cont++;
-		s1++;
+		str[i] = s1[i];
+		i++;
 	}
-	while (*s2)
+	j = 0;
+	while (s2[j])
 	{
-		jp[cont] = *s2;
-		cont++;
-		s2++;
+		str[i] = s2[j];
+		i++;
+		j++;
 	}
-	jp[cont] = '\0';
-	return (jp);
+	str[i] = '\0';
+	return (str);
 }

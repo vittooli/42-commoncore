@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gromiti <gromiti@student.42.fr>            +#+  +:+       +#+        */
+/*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/21 16:11:42 by gromiti           #+#    #+#             */
-/*   Updated: 2024/01/21 16:18:50 by gromiti          ###   ########.fr       */
+/*   Created: 2024/01/20 18:39:29 by volivier          #+#    #+#             */
+/*   Updated: 2024/01/20 18:43:38 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,15 @@
 
 int	ft_lstsize(t_list *lst)
 {
-	int	res;
+	int		ret;
 
-	res = 0;
+	if (lst == NULL)
+		return (0);
+	ret = 0;
 	while (lst)
 	{
-		res++;
 		lst = lst->next;
+		ret++;
 	}
-	return (res);
+	return (ret);
 }

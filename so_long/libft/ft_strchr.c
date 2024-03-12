@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gromiti <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/09 13:44:10 by gromiti           #+#    #+#             */
-/*   Updated: 2024/01/11 12:59:55 by gromiti          ###   ########.fr       */
+/*   Created: 2024/01/13 12:01:21 by volivier          #+#    #+#             */
+/*   Updated: 2024/01/16 18:06:42 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,16 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	char	cast;
-	int		t;
+	int	i;
 
-	cast = (char) c;
-	t = 0;
-	if (*s == '\0' && c != 0)
-		return (0);
-	while (*s != '\0')
+	i = 0;
+	while (s[i])
 	{
-		if (*s == cast)
-		{
-			return ((char *)s);
-			t = 1;
-		}
-		s++;
+		if (s[i] == (char)c)
+			return ((char *)&s[i]);
+		i++;
 	}
-	if (*s == cast)
-		return ((char *)s);
-	if (t == 1)
-		return ((char *)s);
-	return (0);
+	if (s[i] == c)
+		return ((char *)&s[i]);
+	return (NULL);
 }

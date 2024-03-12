@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gromiti <gromiti@student.42.fr>            +#+  +:+       +#+        */
+/*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/21 22:30:49 by gromiti           #+#    #+#             */
-/*   Updated: 2024/01/22 15:41:04 by gromiti          ###   ########.fr       */
+/*   Created: 2024/01/20 18:49:34 by volivier          #+#    #+#             */
+/*   Updated: 2024/01/20 19:21:13 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,20 @@
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list	*new;
-	t_list	*buff;
+	t_list	*head;
+	t_list	*tmp;
 
-	if (!f || !del)
-		return (NULL);
-	buff = NULL;
+	head = NULL;
 	while (lst)
 	{
-		new = ft_lstnew((*f)(lst->content));
-		if (!(new))
+		tmp = ft_lstnew((*f)(lst -> content));
+		if (!tmp)
 		{
-			while (buff)
-			{
-				new = buff->next;
-				ft_lstdelone(buff, del);
-				free (buff);
-				buff = new;
-			}
-			lst = NULL;
+			ft_lstclear(&head, del);
 			return (NULL);
 		}
-		ft_lstadd_back(&buff, new);
-		lst = lst->next;
+		ft_lstadd_back(&head, tmp);
+		lst = lst -> next;
 	}
-	return (buff);
+	return (head);
 }

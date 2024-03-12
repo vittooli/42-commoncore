@@ -3,36 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gromiti <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/11 16:10:04 by gromiti           #+#    #+#             */
-/*   Updated: 2024/01/11 17:11:08 by gromiti          ###   ########.fr       */
+/*   Created: 2024/01/13 13:02:52 by volivier          #+#    #+#             */
+/*   Updated: 2024/01/16 17:39:25 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	char		*d;
-	const char	*s;
-	size_t		cont;
+	size_t	i;
+	char	*d;
+	char	*s;
 
-	d = (char *)dest;
-	s = (char *)src;
-	cont = 0;
-	if (!dest && !src)
+	if (dst == NULL && src == NULL)
 		return (NULL);
-	if (src < dest && src + n > dest)
+	i = 0;
+	d = (char *)dst;
+	s = (char *)src;
+	if (d < s)
 	{
-		while (n--)
-			d[n] = s[n];
-		return (dest);
+		while (i < len)
+		{
+			d[i] = s[i];
+			i++;
+		}
 	}
-	while (cont < n)
+	else
 	{
-		d[cont] = s[cont];
-		cont++;
+		while (len--)
+			d[len] = s[len];
 	}
-	return (dest);
+	return (dst);
 }

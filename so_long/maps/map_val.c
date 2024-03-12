@@ -17,6 +17,11 @@ typedef struct s_map
 	char	**mat;
 }	t_map;
 
+typedef struct s_point
+{
+	int	x;
+	int y;
+}	t_point;
 
 
 char	*f_to_str(char *path) //prende il file contente la mappa e la rende in una stringa
@@ -94,12 +99,33 @@ int	map_char(t_map *map, int nb_lines)
 	return (0);
 }
 
+t_point	find_start(t_map *map)
+{
+	t_point point;
+	
+}
+
+int	map_fill(t_map *map, t_point)
+{
+
+}
+
+
+/* funzione per il controllo della  mappa data in fd
+chiama funzioni per:
+- trasformare il file da "mappa" a stringa
+- trasforare la stringa in matrice (con split)
+- controlli vari:
+	- mappa rettangolare
+	- mappa contiene solo P E C 0 1 
+	- mappa percorribile */
 
 int	map_val(t_map *map)
 {
 	int		fd;
 	char	*map_str;
 	int		nb_lines;
+	t_point	start;
 
 	nb_lines = 0;
 	map_str = f_to_str(map -> path);
@@ -109,6 +135,9 @@ int	map_val(t_map *map)
 	if (map_rec(map->mat) == 1)
 		return (1);
 	if (map_char(map, nb_lines) == 1)
+		return (1);
+	start = find_start(map);
+	if (map_fill(map, ) == 1)
 		return (1);
 	return (0);
 }

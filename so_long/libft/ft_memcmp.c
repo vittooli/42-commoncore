@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gromiti <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 12:17:09 by gromiti           #+#    #+#             */
-/*   Updated: 2024/01/12 12:17:10 by gromiti          ###   ########.fr       */
+/*   Created: 2024/01/13 12:01:03 by volivier          #+#    #+#             */
+/*   Updated: 2024/01/20 17:33:38 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,17 @@
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	char	*src1;
-	char	*src2;
+	unsigned char	*s1_ptr;
+	unsigned char	*s2_ptr;
 
-	src1 = (char *)s1;
-	src2 = (char *)s2;
-	while (n)
+	s1_ptr = (unsigned char *)s1;
+	s2_ptr = (unsigned char *)s2;
+	while (n--)
 	{
-		if (*src1 < *src2)
-			return ((unsigned char)*src1 - (unsigned char)*src2);
-		if (*src1 > *src2)
-			return ((unsigned char)*src1 - (unsigned char)*src2);
-		src1++;
-		src2++;
-		n--;
+		if (*s1_ptr != *s2_ptr)
+			return (*s1_ptr - *s2_ptr);
+		s1_ptr++;
+		s2_ptr++;
 	}
 	return (0);
 }

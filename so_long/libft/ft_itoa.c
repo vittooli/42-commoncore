@@ -3,57 +3,60 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gromiti <gromiti@student.42.fr>            +#+  +:+       +#+        */
+/*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/15 14:26:57 by gromiti           #+#    #+#             */
-/*   Updated: 2024/01/22 17:11:49 by gromiti          ###   ########.fr       */
+/*   Created: 2024/01/15 17:26:34 by volivier          #+#    #+#             */
+/*   Updated: 2024/01/16 17:07:30 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	ft_num_lenght(int n)
+static int	ft_len_int(long int n)
 {
-	size_t	lenght;
+	int	count;
 
-	lenght = 0;
+	count = 0;
 	if (n == 0)
 		return (1);
 	if (n < 0)
-		lenght++;
-	while (n != 0)
 	{
-		n /= 10;
-		lenght++;
+		count++;
+		n *= -1;
 	}
-	return (lenght);
+	while (n)
+	{
+		n = n / 10;
+		count++;
+	}
+	return (count);
 }
 
 char	*ft_itoa(int n)
 {
-	char		*num;
-	int			cont;
-	long int	nb;
+	int			len;
+	char		*ret;
+	long int	nbr;
 
-	nb = (long int)n;
-	cont = ft_num_lenght(n);
-	num = (char *)malloc(sizeof(char) * (ft_num_lenght(n) + 1));
-	if (!num)
+	nbr = (long int)n;
+	len = ft_len_int(nbr);
+	ret = (char *)malloc(sizeof(char) * (len + 1));
+	if (!ret)
 		return (NULL);
-	num[cont] = '\0';
-	cont -= 1;
-	if (n == 0)
-		num[0] = '0';
-	if (n < 0)
+	ret[len] = '\0';
+	len--;
+	if (nbr == 0)
+		ret[0] = '0';
+	if (nbr < 0)
 	{
-		num[0] = '-';
-		nb *= -1;
+		ret[0] = '-';
+		nbr *= -1;
 	}
-	while (nb != 0)
+	while (nbr != 0)
 	{
-		num[cont] = (nb % 10) + '0';
-		nb /= 10;
-		cont --;
+		ret[len] = (nbr % 10 + '0');
+		nbr = nbr / 10;
+		len--;
 	}
-	return (num);
+	return (ret);
 }
