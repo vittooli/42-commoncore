@@ -1,23 +1,27 @@
 #include "maps.h"
 
-char	*f_to_str(char *path) //prende il file contente la mappa e la rende in una stringa
+char  *f_to_str(char *path)
 {
-	int		fd;
-	char	*ret;
-	char	buff[BUFFER_SIZE + 1];
-	char 	*tofree;
-	
-	fd = open(path, O_RDONLY);
-	buff[BUFFER_SIZE] = 0;
-	ret = ft_strdup("");
-	while (read(fd, buff, BUFFER_SIZE) > 0)
-	{
-		tofree = ret;
-		ret = ft_strjoin(ret, buff);
-		free(tofree);
-	}
-	close(fd);
-	return (ret);
+  int  fd;
+  char  buf[BUFFER_SIZE + 1];
+  char  *ret;
+  char  *tofree;
+  int	i;
+  
+  i = 1;
+  ret = ft_strdup("");
+  buf[BUFFER_SIZE] = 0;
+  fd = open(path, O_RDONLY);
+  while(i > 0)
+  {
+    tofree = ret;
+	i = read(fd, buf, BUFFER_SIZE);
+	buf[i] = 0;
+    ret = ft_strjoin(ret, buf);
+    free(tofree);
+  }
+  close(fd);
+  return (ret);
 }
 
 int	map_rec(char **matrix)
@@ -27,12 +31,11 @@ int	map_rec(char **matrix)
 
 	i = 1;
 	len = ft_strlen(matrix[0]);
-	while (matrix[i])
+	while (matrix[i] != 0)
 	{
 		if (ft_strlen(matrix[i]) != len)
 			return (1);
 		i++;
-		len = ft_strlen(matrix[i]);
 	}
 	return (0);
 }
@@ -47,98 +50,98 @@ int map_flags(t_map *map, int x, int y)
 		map->P++;
 	else if (map->mat[y][x] == 'C')
 		map->C++;
+	return (0);
 }
 
 
-int	map_char(t_map *map, int nb_lines)
+int	map_char(t_map *map)
 {
 	int	y;
 	int x;
 
-	y = 0;
-	x = 0;
-	while (y < nb_lines)
+	map->E = 0;
+	map->C = 0;
+	map->P = 0;
+	y = -1;
+	while (++y < map->nb_rows)
 	{
-		x = 0;
-		while (x < ft_strlen(map->mat[0]))
+		x = -1;
+		while (++x < map->nb_cols)
 		{
-			if ((y == 0 || y == nb_lines || x == 0 || x == (ft_strlen(map->mat[0]) - 1)) && map->mat[y][x] != 1)
+			//printf("%d, %d, %c\n", y, x, map->mat[y][x]);
+			if ((y == 0 || y == (map->nb_rows - 1) || x == 0 || x == (ft_strlen(map->mat[0]) - 1)) && map->mat[y][x] != '1')
 				return (1);
-			else
-				map_flags(map, x, y);
-			x++;
+			if (map_flags(map, x, y) == 1)
+				return (1);
 		}
-		y++;
 	}
 	if (map->E != 1 || map->P != 1 || map->C < 1)
 		return(1);
 	return (0);
 }
 
-t_point	find_start(t_map *map, int nb_lines)
+t_point	find_start(t_map *map)
 {
 	t_point p;
 
-	p.x = 0;
-	while (p.x < ft_strlen(map->mat[0]))
+	p.x = -1;
+	while (++p.x < map->nb_cols)
 	{
-		p.y = 0;
-		while (p.y < nb_lines)
+		p.y = -1;
+		while (++p.y < map->nb_rows)
 		{
 			if (map->mat[p.y][p.x] == 'P')
-				break ;
-			p.y++;
+				return (p);
 		}
-		p.x++;
 	}
 	return (p);
 }
 
-int	flood_fill(t_map *map, t_point p, int nb_lines)
+void	flood_fill(t_map *map, int y, int x)
 {
-	int x;
-	int y;
-
-	map->mat[p.y][p.x] = '-';
-	if (map->mat[p.y + 1][p.x] != 1)
-		p.y += 1;
-	else if(map->mat[p.y][p.x + 1] != 1)
-		p.x += 1;
-	else if (map->mat[p.y - 1][p.x] != 1)
-		p.y -= 1;
-	else if (map->mat[p.y][p.x - 1] != 1)
-		p.x -= 1;
-	flood_fill(map, p, nb_lines);
-	x = 0;
-	while (x++ < ft_strlen(map->mat[0]))
-	{
-		y = 0;
-		while (y++ < nb_lines)
-			map_flags(map, x, y);
-	}
-	if (map->P != 0 || map->C != 0 || map->E != 0)
-		return (1);
-	return (0);
+	map->mat[y][x] = '1';
+	if (map->mat[y + 1][x] != '1')
+		flood_fill(map, y + 1, x);
+	if(map->mat[y][x + 1] != '1')
+		flood_fill(map, y, x + 1);
+	if (map->mat[y - 1][x] != '1')
+		flood_fill(map, y - 1, x);
+	if (map->mat[y][x - 1] != '1')
+		flood_fill(map, y, x - 1);
 }
 
-int	map_fill(t_map *map, t_point start, int nb_lines)
+int	map_fill(t_map *map, t_point start)
 {
 	t_map	*copy;
 	int 	i;
-	int		flag;
+	int 	flag;
+	int		j = 0;
 
-	copy->mat = ft_calloc(sizeof(char *), nb_lines);
+	copy->mat = ft_calloc(sizeof(char *), map->nb_rows + 1);
 	if (copy->mat == NULL)
 		return (1);
+	copy->mat[map->nb_rows] = 0;
 	i = 0;
-	while (i < nb_lines)
+	while (i < map->nb_rows)
 	{
 		copy->mat[i] = ft_strdup(map->mat[i]);
 		i++;
 	}
-	flag = flood_fill(copy, start, nb_lines);
+	flood_fill(copy, start.y, start.x);
+	while (j < map->nb_rows)
+	{
+		printf("%s\n", copy->mat[j]);
+		j++;
+	}
+	flag = 0;
+	while (--i >= 0)
+	{
+		if (ft_strchr(copy->mat[i], 'E') != NULL && ft_strchr(copy->mat[i], 'C') != NULL)
+			flag = 1;
+	}
+	printf("hellooo\n");
 	free(copy->mat);
-	if (flag == 1)
+	if (flag == 1)	
 		return (1);
 	return (0);
 }
@@ -159,22 +162,29 @@ int	map_val(t_map *map)
 	char	*map_str;
 	int		nb_lines;
 	t_point	start;
+	int i;
 
 	nb_lines = 0;
 	map_str = f_to_str(map -> path);
 	map->mat = ft_split(map_str, '\n');
-
-	while(map->mat++ != 0)
-		printf("mappa: %s", map->(char *)mat++);
-
-	while (*map->mat++)
+	i = -1;
+	/* while(map->mat[i] != 0)
+	{
+		printf("%s\n", map->mat[i]);
+		i++;
+	}  */
+	while (map->mat[++i] != 0)
 		nb_lines++;
+	printf("nb_lines: %d\n", nb_lines);
 	if (map_rec(map->mat) == 1)
 		return (1);
-	if (map_char(map, nb_lines) == 1)
-		return (1);
-	start = find_start(map, nb_lines);
-	if (map_fill(map, start, nb_lines) == 1)
-		return (1);
+	map->nb_rows = nb_lines;
+	map->nb_cols = ft_strlen(map->mat[0]);
+	if (map_char(map) == 1)
+		return (2);
+	start = find_start(map);
+	printf("qu\n");
+	if (map_fill(map, start) == 1)
+		return (3);
 	return (0);
 }

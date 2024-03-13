@@ -1,6 +1,6 @@
 #include <fcntl.h>
 #include <stdio.h>
-#include "../libft/libft.h"
+#include "libft/libft.h"
 
 #ifndef BUFFER_SIZE
 # define BUFFER_SIZE 42
@@ -15,6 +15,8 @@ typedef struct s_map
 	int		P;
 	int		E;
 	char	**mat;
+	int		nb_rows;
+	int		nb_cols;
 }	t_map;
 
 typedef struct s_point
