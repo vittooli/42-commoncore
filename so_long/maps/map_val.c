@@ -1,28 +1,4 @@
-#include <fcntl.h>
-#include <stdio.h>
-#include "libft.h"
-
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 42
-#endif
-
-typedef struct s_map
-{
-	void	*mlx;
-	void	*win;
-	char	*path;
-	int		C;
-	int		P;
-	int		E;
-	char	**mat;
-}	t_map;
-
-typedef struct s_point
-{
-	int	x;
-	int y;
-}	t_point;
-
+#include "maps.h"
 
 char	*f_to_str(char *path) //prende il file contente la mappa e la rende in una stringa
 {
@@ -99,15 +75,72 @@ int	map_char(t_map *map, int nb_lines)
 	return (0);
 }
 
-t_point	find_start(t_map *map)
+t_point	find_start(t_map *map, int nb_lines)
 {
-	t_point point;
-	
+	t_point p;
+
+	p.x = 0;
+	while (p.x < ft_strlen(map->mat[0]))
+	{
+		p.y = 0;
+		while (p.y < nb_lines)
+		{
+			if (map->mat[p.y][p.x] == 'P')
+				break ;
+			p.y++;
+		}
+		p.x++;
+	}
+	return (p);
 }
 
-int	map_fill(t_map *map, t_point)
+int	flood_fill(t_map *map, t_point p, int nb_lines)
 {
+	int x;
+	int y;
 
+	map->mat[p.y][p.x] = '-';
+	if (map->mat[p.y + 1][p.x] != 1)
+		p.y += 1;
+	else if(map->mat[p.y][p.x + 1] != 1)
+		p.x += 1;
+	else if (map->mat[p.y - 1][p.x] != 1)
+		p.y -= 1;
+	else if (map->mat[p.y][p.x - 1] != 1)
+		p.x -= 1;
+	flood_fill(map, p, nb_lines);
+	x = 0;
+	while (x++ < ft_strlen(map->mat[0]))
+	{
+		y = 0;
+		while (y++ < nb_lines)
+			map_flags(map, x, y);
+	}
+	if (map->P != 0 || map->C != 0 || map->E != 0)
+		return (1);
+	return (0);
+}
+
+int	map_fill(t_map *map, t_point start, int nb_lines)
+{
+	t_map	*copy;
+	int 	i;
+	int		flag;
+
+	copy->mat = ft_calloc(sizeof(char *), nb_lines);
+	if (copy->mat == NULL)
+		return (1);
+	i = 0;
+	while (i < nb_lines)
+	{
+		copy->mat[i] = ft_strdup(map->mat[i]);
+		i++;
+	}
+	flag = flood_fill(copy, start, nb_lines);
+	free(copy->mat);
+	if (flag == 1)
+		return (1);
+	return (0);
 }
 
 
@@ -130,14 +163,18 @@ int	map_val(t_map *map)
 	nb_lines = 0;
 	map_str = f_to_str(map -> path);
 	map->mat = ft_split(map_str, '\n');
+
+	while(map->mat++ != 0)
+		printf("mappa: %s", map->(char *)mat++);
+
 	while (*map->mat++)
 		nb_lines++;
 	if (map_rec(map->mat) == 1)
 		return (1);
 	if (map_char(map, nb_lines) == 1)
 		return (1);
-	start = find_start(map);
-	if (map_fill(map, ) == 1)
+	start = find_start(map, nb_lines);
+	if (map_fill(map, start, nb_lines) == 1)
 		return (1);
 	return (0);
 }
