@@ -97,50 +97,51 @@ t_point	find_start(t_map *map)
 	return (p);
 }
 
-void	flood_fill(t_map *map, int y, int x)
+int	flood_fill(char **map, int y, int x)
 {
-	map->mat[y][x] = '1';
-	if (map->mat[y + 1][x] != '1')
+	map[y][x] = '1';
+	if (map[y + 1][x] != '1')
 		flood_fill(map, y + 1, x);
-	if(map->mat[y][x + 1] != '1')
+	if(map[y][x + 1] != '1')
 		flood_fill(map, y, x + 1);
-	if (map->mat[y - 1][x] != '1')
+	if (map[y - 1][x] != '1')
 		flood_fill(map, y - 1, x);
-	if (map->mat[y][x - 1] != '1')
+	if (map[y][x - 1] != '1')
 		flood_fill(map, y, x - 1);
+	return (0);
 }
 
 int	map_fill(t_map *map, t_point start)
 {
-	t_map	*copy;
+	char	**copy;
 	int 	i;
 	int 	flag;
 	int		j = 0;
 
-	copy->mat = ft_calloc(sizeof(char *), map->nb_rows + 1);
-	if (copy->mat == NULL)
+	copy = ft_calloc(sizeof(char *), map->nb_rows + 1);
+	if (copy == NULL)
 		return (1);
-	copy->mat[map->nb_rows] = 0;
+	copy[map->nb_rows] = 0;
 	i = 0;
 	while (i < map->nb_rows)
 	{
-		copy->mat[i] = ft_strdup(map->mat[i]);
+		copy[i] = ft_strdup(map->mat[i]);
 		i++;
 	}
 	flood_fill(copy, start.y, start.x);
 	while (j < map->nb_rows)
 	{
-		printf("%s\n", copy->mat[j]);
+		//printf("%s\n", copy->mat[j]);
 		j++;
 	}
 	flag = 0;
 	while (--i >= 0)
 	{
-		if (ft_strchr(copy->mat[i], 'E') != NULL && ft_strchr(copy->mat[i], 'C') != NULL)
+		if (ft_strchr(copy[i], 'E') != NULL || ft_strchr(copy[i], 'C') != NULL)
 			flag = 1;
 	}
-	printf("hellooo\n");
-	free(copy->mat);
+	//printf("hellooo\n");
+	free(copy);
 	if (flag == 1)	
 		return (1);
 	return (0);
@@ -158,7 +159,6 @@ chiama funzioni per:
 
 int	map_val(t_map *map)
 {
-	int		fd;
 	char	*map_str;
 	int		nb_lines;
 	t_point	start;
@@ -168,23 +168,16 @@ int	map_val(t_map *map)
 	map_str = f_to_str(map -> path);
 	map->mat = ft_split(map_str, '\n');
 	i = -1;
-	/* while(map->mat[i] != 0)
-	{
-		printf("%s\n", map->mat[i]);
-		i++;
-	}  */
 	while (map->mat[++i] != 0)
 		nb_lines++;
-	printf("nb_lines: %d\n", nb_lines);
-	if (map_rec(map->mat) == 1)
+	if (map_rec(map->mat) == 1) //la mappa non è rettangolare
 		return (1);
 	map->nb_rows = nb_lines;
 	map->nb_cols = ft_strlen(map->mat[0]);
-	if (map_char(map) == 1)
+	if (map_char(map) == 1) //nella mappa non sono presenti i caratteri giusti
 		return (2);
 	start = find_start(map);
-	printf("qu\n");
-	if (map_fill(map, start) == 1)
+	if (map_fill(map, start) == 1) //mappa non percorribile
 		return (3);
 	return (0);
 }
