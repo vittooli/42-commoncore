@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <fcntl.h>
 #include <stdio.h>
 #include "libft/libft.h"
@@ -25,4 +26,11 @@ typedef struct s_point
 	int y;
 }	t_point;
 
-int	map_val(t_map *map);
+int		map_val(t_map *map);
+int		map_fill(t_map *map, t_point start, int nb_rows);
+t_point	find_start(t_map *map, int nb_rows);
+int		map_char(t_map *map, int nb_rows);
+int		map_rec(char **matrix);
+void	flood_fill(char **map, int y, int x);
+int 	map_flags(t_map *map, int x, int y);
+char	*f_to_str(char *path);
