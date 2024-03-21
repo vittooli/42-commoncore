@@ -15,13 +15,6 @@
 # define RES 64
 #endif
 
-typedef	struct s_game
-{
-	void	*mlx;
-	void	*win;
-	t_map	map;
-};
-
 typedef struct s_map
 {
 	char	*path;
@@ -33,21 +26,40 @@ typedef struct s_map
 	int		nb_cols;
 }	t_map;
 
+
+
 typedef struct s_point
 {
 	int	x;
 	int y;
 }	t_point;
 
-typedef struct s_data
+/* typedef struct s_data
 {
 	void	*img;
 	char	*addr;
 	int		bit_per_pixel;
 	int		line_lenght;
 	int		endian;
-}	t_data;
+}	t_data; */
 
+typedef struct s_img
+{
+	void	*wall;
+	void	*green;
+	void	*t[4];
+	void	*soil;
+	void	*bud;
+	void	*tree;
+}	t_img;
+
+typedef	struct s_game
+{
+	void	*mlx;
+	void	*win;
+	t_map	map;
+	t_img	img;
+}	t_game;
 
 int		map_val(t_map *map);
 int		map_fill(t_map *map, t_point start);
