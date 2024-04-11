@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validation.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/11 15:56:29 by volivier          #+#    #+#             */
+/*   Updated: 2024/04/11 15:56:30 by volivier         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 #include <stdio.h> 
 
@@ -5,18 +17,13 @@ int check_list(char **list)
 {
     int     i;
     int     j;
-    int     sign;
     char    *str;
 
-    j = 0;
-    while(list[j] != NULL)
+    j = -1;
+    while(list[++j] != NULL)
     {    
         i = 0;
-        sign = 1;
         str = list[j];
-        while (str[i] == ' ' || str[i] == '\n' || str[i] == '\r' \
-                || str[i] == '\t' || str[i] == '\v' || str[i] == '\f')
-            i++;
         if (str[i] == '-' || str[i] == '+')
         {
             if (str[i + 1] != '\0')
@@ -30,7 +37,6 @@ int check_list(char **list)
                 return (0);
             i++;
         }
-        j++;
     }
     return (1);
 }
@@ -55,8 +61,6 @@ char **get_av(int ac, char **av)
 
 char    **ft_validate(int ac, char **av)
 {
-    int i;
-
     char **mat;
 
     if (ac == 2)
@@ -100,27 +104,4 @@ int check_stack(t_list  *node)
         node = node->next;
     }
     return (1);
-}
-
-int main(int ac, char **av)
-{
-    t_list  *node;
-    
-    if (ac >= 2)
-    {
-        //printf("%d", ft_validate(ac, av));
-        if (ft_validate(ac, av) == NULL)
-            return (0);
-        node = get_stack(ft_validate(ac, av));
-        if (check_stack(node) == 0)
-        {
-            printf("doppio\n");
-            return (0);
-        }
-        while(node)
-        {
-            printf("%d\n", node->content);
-            node = node->next;
-        }
-    }
 }

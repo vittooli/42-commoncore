@@ -1,30 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/20 18:38:15 by volivier          #+#    #+#             */
-/*   Updated: 2024/04/10 18:55:57 by volivier         ###   ########.fr       */
+/*   Created: 2024/04/11 15:56:40 by volivier          #+#    #+#             */
+/*   Updated: 2024/04/11 15:56:41 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+int	lst_size(t_list *list)
 {
-	t_list	*temp;
+	int len;
 
-	if (lst == NULL || new == NULL)
-		return ;
-	if (*lst == NULL)
+	len = 0;
+	while(list)
 	{
-		*lst = new;
-		return ;
+		len++;
+		list = list->next;
 	}
-	temp = *lst;
-	while (temp->next)
-		temp = temp->next;
-	temp->next = new;
+	return (len);
+}
+
+int is_sorted(t_list *stack)
+{
+    t_list  *head;
+
+    head = stack;
+    while (head && head->next)
+    {
+        if (head->content > head->next->content)
+            return (1);
+        head = head->next;
+    }
+    return (0);
 }

@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/20 18:38:15 by volivier          #+#    #+#             */
-/*   Updated: 2024/04/10 18:55:57 by volivier         ###   ########.fr       */
+/*   Created: 2024/01/23 18:32:31 by volivier          #+#    #+#             */
+/*   Updated: 2024/02/01 11:01:51 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
+#include <stdio.h>
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+int	ft_putstr(char *str)
 {
-	t_list	*temp;
+	int	i;
 
-	if (lst == NULL || new == NULL)
-		return ;
-	if (*lst == NULL)
+	i = 0;
+	if (str == NULL)
+		return (write(1, "(null)", 6));
+	while (*str != '\0')
 	{
-		*lst = new;
-		return ;
+		write(1, str, 1);
+		str++;
+		i++;
 	}
-	temp = *lst;
-	while (temp->next)
-		temp = temp->next;
-	temp->next = new;
+	return (i);
 }
