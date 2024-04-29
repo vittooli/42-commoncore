@@ -6,7 +6,7 @@
 /*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 15:56:26 by volivier          #+#    #+#             */
-/*   Updated: 2024/04/28 19:23:05 by volivier         ###   ########.fr       */
+/*   Updated: 2024/04/29 21:02:36 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	rra(t_list **stack_a)
 {
 	if (rev_rotate(stack_a) == 0)
 		return (0);
-	printf("rra\n");
+	ft_printf("rra\n");
 	return (1);
 }
 
@@ -47,13 +47,13 @@ int	rrb(t_list **stack_b)
 {
 	if (rev_rotate(stack_b) == 0)
 		return (0);
-	printf("rrb\n");
+	ft_printf("rrb\n");
 	return (1);
 }
 int	rrr(t_list **stack_a, t_list **stack_b)
 {
 	if (rev_rotate(stack_a) == 0 && rev_rotate(stack_b) == 0)
 		return (0);
-	printf("rrr\n");
+	ft_printf("rrr\n");
 	return (1);
 }

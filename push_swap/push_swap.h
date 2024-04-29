@@ -6,7 +6,7 @@
 /*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 15:56:31 by volivier          #+#    #+#             */
-/*   Updated: 2024/04/29 20:56:16 by volivier         ###   ########.fr       */
+/*   Updated: 2024/04/29 21:01:40 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PUSH_SWAP_H
 
 #include "libft/libft.h"
+#include "printf/ft_printf.h"
 #include <stdio.h>
 
 typedef struct s_move

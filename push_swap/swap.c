@@ -15,7 +15,7 @@ int	sa(t_list **stack)
 {
 	if (swap(stack) == 0)
 		return (0);
-	printf("sa\n");
+	ft_printf("sa\n");
 	return (1);
 }
 
@@ -23,7 +23,7 @@ int	sb(t_list **stack)
 {
 	if (swap(stack) == 0)
 		return (0);
-	printf("sb\n");
+	ft_printf("sb\n");
 	return (1);
 }
 
@@ -31,6 +31,6 @@ int	ss(t_list **stack_a, t_list **stack_b)
 {
 	if (swap(stack_a) == 0 || swap(stack_b) == 0)
 		return (0);
-	printf("ss\n");
+	ft_printf("ss\n");
 	return (1);
 }
