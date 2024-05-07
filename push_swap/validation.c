@@ -6,12 +6,11 @@
 /*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 15:56:29 by volivier          #+#    #+#             */
-/*   Updated: 2024/04/11 15:56:30 by volivier         ###   ########.fr       */
+/*   Updated: 2024/05/07 16:44:58 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h> 
 
 int check_list(char **list)
 {
@@ -45,17 +44,20 @@ char **get_av(int ac, char **av)
 {
     char    **mat;
     int     i;
+    int     j;
 
     i = 1;
+    j = 0;
     mat = (char **)malloc((sizeof(char *)) * ac);
     if (mat == NULL)
         return (NULL);
     while (i < ac)
     {
-        mat[i - 1] = ft_strdup(av[i]);
+        mat[j] = ft_strdup(av[i]);
         i++;
+        j++;
     }
-    mat[i] = NULL;
+    mat[j] = NULL;
     return (mat);
 }
 
@@ -67,24 +69,40 @@ char    **ft_validate(int ac, char **av)
         mat = ft_split(av[1], 32);
     else
         mat = get_av(ac, av);
-    if(check_list(mat) == 0)
+    if(check_list(mat) == 0 || check_dup(mat) == 0)
+    {
+        free_mat(mat);
         return (NULL);
+    }
     return (mat); 
 }
 t_list  *get_stack(char **mat)
 {
-    int     i;
-    t_list  *head;
-    t_list  *node;
+    int         i;
+    t_list      *head;
+    t_list      *node;
+    long int    num;
 
     i = 1;
-    head = ft_lstnew(ft_atoi(mat[0]));
+    num = ft_atoi(mat[0]);
+    printf("mat[0]: %s\n", mat[0]);
+    printf("num: %li\n", num);
+    if (num < -2147483648 || num > 2147483647)
+        return NULL;
+    head = ft_lstnew(num);
     while (mat[i] != NULL)
     {
-        node = ft_lstnew(ft_atoi(mat[i]));
+        num = ft_atoi(mat[i]);
+        if (num < -2147483648 || num > 2147483647)
+        {
+            free_list(&head);
+            return (NULL);
+        }
+        node = ft_lstnew(num);
         ft_lstadd_back(&head, node);    
         i++;
     }
+    free_mat(mat);
     return (head);
 }
 

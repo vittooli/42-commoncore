@@ -6,71 +6,13 @@
 /*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 16:25:55 by volivier          #+#    #+#             */
-/*   Updated: 2024/04/28 19:18:19 by volivier         ###   ########.fr       */
+/*   Updated: 2024/05/07 16:21:41 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_list *return_max(t_list *stack)
-{
-	t_list	*max;
-	t_list	*head;
 
-	head = stack;
-	max = head;
-	while(head)
-	{
-		if (head->content > max->content)
-			max = head;
-		head = head->next;
-	}
-	return (max);
-}
-
-/* potrebbe servirmi ma boh */
-t_list *return_min(t_list *stack)
-{
-	t_list *min;
-	t_list *head;
-
-	head = stack;
-	min = head; 
-	while(head)
-	{
-		if (head->content < min->content)
-			min = head;
-		head = head->next;
-	}
-	return (min);
-}
-
-/* potrebbe servirmi ma boh */
-int	find_min(t_list **head)
-{
-	t_list *tmp;
-
-	tmp = (*head)->next;
-	if((*head)->content < tmp->content && (*head)->content < tmp->next->content)
-		return (1);	
-	else if(tmp->content < (*head)->content && tmp->content < tmp->next->content)
-		return (2);
-	else
-		return(3);
-}
-
-int	find_max_three(t_list **head)
-{
-	t_list *tmp;
-
-	tmp = (*head)->next;
-	if((*head)->content > tmp->content && (*head)->content > tmp->next->content)
-		return (1);	
-	else if(tmp->content > (*head)->content && tmp->content > tmp->next->content)
-		return (2);
-	else
-		return(3);
-}
 
 int	sort_three(t_list **stack)
 {
@@ -83,4 +25,42 @@ int	sort_three(t_list **stack)
 	return(0);
 }
 
+void	push_min(t_list **stack, t_list **b)
+{
+	t_list	*head;
+	int		index;
+	
+	head = *stack;
+	while (head)
+	{
+		if (head == return_min(*stack))
+			index = get_index(*stack, head);
+		head = head->next;
+	}
+	if (index <= 3)
+	{
+		while (*stack != return_min(*stack))
+			ra(stack);
+		pb(stack, b);
+	}
+	else
+	{
+		while (*stack != return_min(*stack))
+			rra(stack);
+		pb(stack, b);
+	}
+}
 
+void	sort_else(t_list **stack, t_list **b)
+{
+	if (lst_size(*stack) == 4)
+		push_min(stack, b);
+	else
+	{
+		push_min(stack, b);
+		push_min(stack, b);
+	}
+	sort_three(stack);
+	pa(b, stack);
+	pa(b, stack);	
+}

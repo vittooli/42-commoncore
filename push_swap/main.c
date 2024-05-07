@@ -6,7 +6,7 @@
 /*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 15:56:36 by volivier          #+#    #+#             */
-/*   Updated: 2024/04/29 20:55:54 by volivier         ###   ########.fr       */
+/*   Updated: 2024/05/07 16:25:41 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,20 @@ int print_list(t_list *stack)
         head = head->next;
     }
     return(0);
+}
+
+int free_list(t_list **stack)
+{
+    t_list *head;
+
+    head = *stack;
+    
+    while (head)
+    {
+        free(head);
+        head = head->next;
+    }
+    return (0);
 }
 t_move find_move(t_list *a, t_list *b, t_move *move)
 {
@@ -57,10 +71,12 @@ int	sort(t_list **a, t_list **b, t_move move)
 {
 	if (lst_size(*a) < 2)
 		return (1);
-	if (lst_size(*a) == 2) //se la lista ha solo due elementi non ordinati basta scambiarli
+	else if (lst_size(*a) == 2) //se la lista ha solo due elementi non ordinati basta scambiarli
 		sa(a);
-	if (lst_size(*a) == 3)
+	else if (lst_size(*a) == 3)
 		sort_three(a);
+    else if (lst_size(*a) == 4 || lst_size(*a) == 5 )
+        sort_else(a, b);
     else    
     {
         pb(a, b);
@@ -75,7 +91,6 @@ int	sort(t_list **a, t_list **b, t_move move)
         while(*b)
             pa(b, a);
     }
-	//free(b);
 	return (0);
 }
 int main(int ac, char **av)
@@ -83,18 +98,29 @@ int main(int ac, char **av)
     t_list  *a;
 	t_list	*b;
     t_move  move;
+    char    **mat;
     
     set_structs(&move);
     if (ac < 2)
-        return (0);
-    if (ft_validate(ac, av) == NULL)
-        return (0);
-    a = get_stack(ft_validate(ac, av)); //get_stack chiama lst_new che alloca
-    b = (t_list *)malloc(sizeof(t_list)); //allocazione
+        return (write(2, "Error\n", 6));
+    mat = ft_validate(ac, av);
+    if (mat == NULL)
+        return (write(2, "Error\n", 6));
+    a = get_stack(mat);
+    print_list(a);
+    if (a == NULL)
+    {
+        write(2, "Error\n", 6);
+        return (free_list(&a));
+    }
+    b = (t_list *)malloc(sizeof(t_list));
     b = NULL;
     if (is_sorted_a(a) == 0)
+    {
+        printf("boh");
         return (0);
+    }
     sort(&a, &b, move);
-    print_list(a);
+    return (free_list(&a));
 }
 

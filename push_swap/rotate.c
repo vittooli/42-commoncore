@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rotate.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/07 15:46:04 by volivier          #+#    #+#             */
+/*   Updated: 2024/05/07 15:46:05 by volivier         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	optimize(t_list **stack)
 {
-	if (return_min(*stack) == *stack)
+	if ((*stack)->content < ((return_max(*stack) - return_min(*stack))/2))
 		rb(stack);
 	else
 		rrb(stack);
