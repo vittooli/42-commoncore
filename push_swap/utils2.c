@@ -6,7 +6,7 @@
 /*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 13:12:35 by volivier          #+#    #+#             */
-/*   Updated: 2024/05/07 16:45:07 by volivier         ###   ########.fr       */
+/*   Updated: 2024/05/09 16:49:15 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,24 +82,4 @@ void	free_mat(char **mat)
 		i++;
 	}
 	free(mat);
-}
-
-int	check_dup(char **mat)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while(mat[i]) //prima stringa
-	{
-		j = i + 1;
-		while (mat[j]) //tutte le altre
-		{
-			if (ft_atoi(mat[i]) == ft_atoi(mat[j]))
-				return (0);
-			j++;
-		}
-		i++;
-	}
-	return (1);
 }

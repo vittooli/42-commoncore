@@ -6,7 +6,7 @@
 /*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 15:56:36 by volivier          #+#    #+#             */
-/*   Updated: 2024/05/07 16:25:41 by volivier         ###   ########.fr       */
+/*   Updated: 2024/05/09 17:41:57 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,6 @@ int print_list(t_list *stack)
     return(0);
 }
 
-int free_list(t_list **stack)
-{
-    t_list *head;
-
-    head = *stack;
-    
-    while (head)
-    {
-        free(head);
-        head = head->next;
-    }
-    return (0);
-}
 t_move find_move(t_list *a, t_list *b, t_move *move)
 {
     t_list  *head;
@@ -107,7 +94,6 @@ int main(int ac, char **av)
     if (mat == NULL)
         return (write(2, "Error\n", 6));
     a = get_stack(mat);
-    print_list(a);
     if (a == NULL)
     {
         write(2, "Error\n", 6);
@@ -117,7 +103,6 @@ int main(int ac, char **av)
     b = NULL;
     if (is_sorted_a(a) == 0)
     {
-        printf("boh");
         return (0);
     }
     sort(&a, &b, move);

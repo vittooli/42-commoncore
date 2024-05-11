@@ -6,7 +6,7 @@
 /*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 12:53:36 by volivier          #+#    #+#             */
-/*   Updated: 2024/05/07 15:23:08 by volivier         ###   ########.fr       */
+/*   Updated: 2024/05/09 16:40:46 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int			ft_isalpha(int c);
 int			ft_isascii(int c);
 int			ft_isdigit(int c);
 int			ft_isprint(int c);
-int			ft_strlen(char *str);
+int			ft_strlen(const char *str);
 int			ft_tolower(int c);
 int			ft_toupper(int c);
 long int	ft_atoi(const char *str);

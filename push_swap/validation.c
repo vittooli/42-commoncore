@@ -6,7 +6,7 @@
 /*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 15:56:29 by volivier          #+#    #+#             */
-/*   Updated: 2024/05/07 16:44:58 by volivier         ###   ########.fr       */
+/*   Updated: 2024/05/09 17:22:14 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,6 @@ t_list  *get_stack(char **mat)
 
     i = 1;
     num = ft_atoi(mat[0]);
-    printf("mat[0]: %s\n", mat[0]);
-    printf("num: %li\n", num);
     if (num < -2147483648 || num > 2147483647)
         return NULL;
     head = ft_lstnew(num);

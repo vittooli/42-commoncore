@@ -6,7 +6,7 @@
 /*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 15:56:31 by volivier          #+#    #+#             */
-/*   Updated: 2024/05/07 16:45:25 by volivier         ###   ########.fr       */
+/*   Updated: 2024/05/07 17:52:18 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include "libft/libft.h"
 #include "printf/ft_printf.h"
+#include "get_next_line/get_next_line.h"
 #include <stdio.h>
 
 typedef struct s_move
