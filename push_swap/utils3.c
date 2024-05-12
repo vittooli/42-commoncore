@@ -22,14 +22,16 @@ int	check_dup(char **mat)
 
 int free_list(t_list **stack)
 {
-    t_list *head;
+    t_list	*head;
+	t_list	*next;
 
     head = *stack;
     
     while (head)
     {
+		next = head->next;
         free(head);
-        head = head->next;
+        head = next;
     }
     return (0);
 }

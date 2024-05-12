@@ -6,7 +6,7 @@
 /*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 15:56:36 by volivier          #+#    #+#             */
-/*   Updated: 2024/05/09 17:41:57 by volivier         ###   ########.fr       */
+/*   Updated: 2024/05/12 13:36:15 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,6 @@ int main(int ac, char **av)
         return (free_list(&a));
     }
     b = (t_list *)malloc(sizeof(t_list));
-    b = NULL;
     if (is_sorted_a(a) == 0)
     {
         return (0);
