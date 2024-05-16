@@ -6,7 +6,7 @@
 #    By: volivier <volivier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/24 16:45:38 by volivier          #+#    #+#              #
-#    Updated: 2024/05/09 17:17:44 by volivier         ###   ########.fr        #
+#    Updated: 2024/05/16 17:32:37 by volivier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,10 +49,20 @@ clean:
 	$(RM) $(BONUS_OBJS)
 
 fclean: clean
+	make -C printf/ fclean
+	make -C libft/ fclean
 	$(RM) $(NAME) $(OBJS)
 	$(RM) $(BONUS) $(BONUS_OBJS) 
 
 re: fclean all
+
+git: 
+	make -C libft/ fclean
+	make -C printf/ fclean
+	make fclean
+	git add .
+	git commit -m "autocommit"
+	git push
 
 .PHONY: all clean fclean re .c.o
 

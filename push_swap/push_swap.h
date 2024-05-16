@@ -6,7 +6,7 @@
 /*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 15:56:31 by volivier          #+#    #+#             */
-/*   Updated: 2024/05/07 17:52:18 by volivier         ###   ########.fr       */
+/*   Updated: 2024/05/16 17:43:27 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void 	find_cost(t_list *a, t_list *b, t_move *move);
 int		get_index(t_list *stack, t_list	*target);
 /* move */
 void 	move_stacks(t_list **a, t_list **b, t_move *move);
-void	optimize(t_list **stack);
+void	optimize(t_list **stack, int inde);
 int 	free_list(t_list **stack);
 void	free_mat(char **mat);
 

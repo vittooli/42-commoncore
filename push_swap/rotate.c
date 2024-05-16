@@ -6,15 +6,15 @@
 /*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 15:46:04 by volivier          #+#    #+#             */
-/*   Updated: 2024/05/07 15:46:05 by volivier         ###   ########.fr       */
+/*   Updated: 2024/05/16 18:04:03 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	optimize(t_list **stack)
+void	optimize(t_list **stack, int index)
 {
-	if ((*stack)->content < ((return_max(*stack) - return_min(*stack))/2))
+	if (index < lst_size(*stack) / 2)
 		rb(stack);
 	else
 		rrb(stack);

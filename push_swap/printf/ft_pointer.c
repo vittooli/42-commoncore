@@ -6,7 +6,7 @@
 /*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 15:25:18 by volivier          #+#    #+#             */
-/*   Updated: 2024/02/02 16:28:31 by volivier         ###   ########.fr       */
+/*   Updated: 2024/05/16 16:44:14 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,6 @@ int	ft_len(unsigned long n)
 	count = 0;
 	if (n == 0)
 		return (1);
-	if (n < 0)
-	{
-		count++;
-		n *= -1;
-	}
 	while (n)
 	{
 		n = n / 16;

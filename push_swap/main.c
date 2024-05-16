@@ -6,7 +6,7 @@
 /*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 15:56:36 by volivier          #+#    #+#             */
-/*   Updated: 2024/05/12 13:36:15 by volivier         ###   ########.fr       */
+/*   Updated: 2024/05/16 18:04:33 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	set_structs(t_move *move)
 	move->target_a = NULL;
 	move->target_b = NULL;
 }
+
 int print_list(t_list *stack)
 {
     t_list  *head;
@@ -56,6 +57,8 @@ t_move find_move(t_list *a, t_list *b, t_move *move)
 }
 int	sort(t_list **a, t_list **b, t_move move)
 {
+   int final_index;
+    
 	if (lst_size(*a) < 2)
 		return (1);
 	else if (lst_size(*a) == 2) //se la lista ha solo due elementi non ordinati basta scambiarli
@@ -73,8 +76,9 @@ int	sort(t_list **a, t_list **b, t_move move)
             move = find_move(*a, *b, &move);
             move_stacks(a, b, &move);
         }
-        while(is_sorted_b(*b) == 1)
-            optimize(b);
+        final_index = get_index(*b,(return_max(*b)));
+        while(*b != return_max(*b))
+            optimize(b, final_index);
         while(*b)
             pa(b, a);
     }
@@ -99,7 +103,7 @@ int main(int ac, char **av)
         write(2, "Error\n", 6);
         return (free_list(&a));
     }
-    b = (t_list *)malloc(sizeof(t_list));
+    b = NULL;
     if (is_sorted_a(a) == 0)
     {
         return (0);
