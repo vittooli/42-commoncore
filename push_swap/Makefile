@@ -6,7 +6,7 @@
 #    By: volivier <volivier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/24 16:45:38 by volivier          #+#    #+#              #
-#    Updated: 2024/05/16 17:32:37 by volivier         ###   ########.fr        #
+#    Updated: 2024/05/24 10:01:48 by volivier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ BONUS = checker
 CC = cc
 FLAGS = -Wall -Wextra -Werror
 
-SRCS = main.c move.c push.c rev_rotate.c rotate.c swap.c sort.c utils1.c utils2.c \
+SRCS = main.c move.c push.c rev_rotate.c rotate.c swap.c sort.c sorting.c utils1.c utils2.c \
 utils3.c validation.c target.c 
 BONUS_SRCS = checker.c utils1.c utils2.c utils3.c validation.c push.c rotate.c rev_rotate.c \
 swap.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c

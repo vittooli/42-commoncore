@@ -6,7 +6,7 @@
 /*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 15:45:54 by volivier          #+#    #+#             */
-/*   Updated: 2024/05/07 15:45:55 by volivier         ###   ########.fr       */
+/*   Updated: 2024/05/24 13:19:57 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 int	push(t_list **src, t_list **dest)
 {
 	t_list	*tmp;
-	//t_list	*node;
-	
+
 	if (*src == NULL)
 		return (0);
 	tmp = *src;
@@ -25,6 +24,7 @@ int	push(t_list **src, t_list **dest)
 	*dest = tmp;
 	return (1);
 }
+
 int	pa(t_list **stack_b, t_list **stack_a)
 {
 	if (push(stack_b, stack_a) == 0)

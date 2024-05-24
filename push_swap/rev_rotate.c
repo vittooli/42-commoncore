@@ -6,7 +6,7 @@
 /*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 15:56:26 by volivier          #+#    #+#             */
-/*   Updated: 2024/04/29 21:02:36 by volivier         ###   ########.fr       */
+/*   Updated: 2024/05/24 13:20:29 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int	rev_rotate(t_list **stack)
 	last = ft_lstlast(*stack);
 	while (head)
 	{
-		if (head->next->next == NULL) //se è il penultimo nodo
+		if (head->next->next == NULL)
 		{
-			head->next = NULL; //diventa l'ultimo nodo
+			head->next = NULL;
 			break ;
 		}
 		head = head->next;
@@ -50,9 +50,10 @@ int	rrb(t_list **stack_b)
 	ft_printf("rrb\n");
 	return (1);
 }
+
 int	rrr(t_list **stack_a, t_list **stack_b)
 {
-	if (rev_rotate(stack_a) == 0 && rev_rotate(stack_b) == 0)
+	if (rev_rotate(stack_a) == 0 || rev_rotate(stack_b) == 0)
 		return (0);
 	ft_printf("rrr\n");
 	return (1);

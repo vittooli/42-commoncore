@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checker.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/24 10:07:06 by volivier          #+#    #+#             */
+/*   Updated: 2024/05/24 10:08:31 by volivier         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 int	ft_command_two(char *command, t_list **a, t_list **b)
@@ -40,11 +52,12 @@ int	ft_command(char *command, t_list **a, t_list **b)
 		return (push(a, b));
 	return (ft_command_two(command, a, b));
 }
+
 int	checker_loop(t_list **a, t_list **b)
 {
 	char	*tmp;
 
-	while(1)
+	while (1)
 	{
 		tmp = get_next_line(0);
 		if (tmp == NULL)
@@ -66,21 +79,21 @@ int	main(int ac, char **av)
 {
 	t_list	*a;
 	t_list	*b;
-	char    **mat;
-    
-    if (ac < 2)
-        return (write(2, "Error\n", 6));
-    mat = ft_validate(ac, av);
-    if (mat == NULL)
-        return (write(2, "Error\n", 6));
-    a = get_stack(mat);
+	char	**mat;
+
+	if (ac < 2)
+		return (write(2, "Error\n", 6));
+	mat = ft_validate(ac, av);
+	if (mat == NULL)
+		return (write(2, "Error\n", 6));
+	a = get_stack(mat);
 	if (a == NULL)
-    {
-        write(2, "Error\n", 6);
-        return (free_list(&a));
-    }
-    b = (t_list *)malloc(sizeof(t_list));
-    b = NULL;
+	{
+		write(2, "Error\n", 6);
+		return (free_list(&a));
+	}
+	b = (t_list *)malloc(sizeof(t_list));
+	b = NULL;
 	if (checker_loop(&a, &b) == 0)
 		return (0);
 	if (is_sorted_a(a) == 0 && lst_size(b) == 0)
@@ -90,4 +103,3 @@ int	main(int ac, char **av)
 	free_list(&a);
 	free_list(&b);
 }
-

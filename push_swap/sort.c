@@ -6,13 +6,11 @@
 /*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 16:25:55 by volivier          #+#    #+#             */
-/*   Updated: 2024/05/07 16:21:41 by volivier         ###   ########.fr       */
+/*   Updated: 2024/05/24 13:21:25 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-
 
 int	sort_three(t_list **stack)
 {
@@ -22,14 +20,14 @@ int	sort_three(t_list **stack)
 		rra(stack);
 	if (find_max_three(stack) == 3 && is_sorted_a(*stack) == 1)
 		sa(stack);
-	return(0);
+	return (0);
 }
 
 void	push_min(t_list **stack, t_list **b)
 {
 	t_list	*head;
 	int		index;
-	
+
 	head = *stack;
 	while (head)
 	{
@@ -62,5 +60,5 @@ void	sort_else(t_list **stack, t_list **b)
 	}
 	sort_three(stack);
 	pa(b, stack);
-	pa(b, stack);	
+	pa(b, stack);
 }

@@ -6,7 +6,7 @@
 /*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 15:46:10 by volivier          #+#    #+#             */
-/*   Updated: 2024/05/07 15:46:11 by volivier         ###   ########.fr       */
+/*   Updated: 2024/05/24 13:22:28 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	swap(t_list **stack)
 {
 	int		tmp;
+
 	if (lst_size(*stack) < 2)
 		return (0);
 	tmp = (*stack)->content;

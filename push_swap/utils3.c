@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils3.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/24 13:36:48 by volivier          #+#    #+#             */
+/*   Updated: 2024/05/24 13:37:52 by volivier         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 int	check_dup(char **mat)
@@ -6,10 +18,10 @@ int	check_dup(char **mat)
 	int	j;
 
 	i = 0;
-	while(mat[i]) //prima stringa
+	while (mat[i])
 	{
 		j = i + 1;
-		while (mat[j]) //tutte le altre
+		while (mat[j])
 		{
 			if (ft_atoi(mat[i]) == ft_atoi(mat[j]))
 				return (0);
@@ -20,18 +32,17 @@ int	check_dup(char **mat)
 	return (1);
 }
 
-int free_list(t_list **stack)
+int	free_list(t_list **stack)
 {
-    t_list	*head;
+	t_list	*head;
 	t_list	*next;
 
-    head = *stack;
-    
-    while (head)
-    {
+	head = *stack;
+	while (head)
+	{
 		next = head->next;
-        free(head);
-        head = next;
-    }
-    return (0);
+		free(head);
+		head = next;
+	}
+	return (0);
 }

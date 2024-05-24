@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   move.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/24 10:08:44 by volivier          #+#    #+#             */
+/*   Updated: 2024/05/24 10:09:13 by volivier         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	move_case_one(t_list **a, t_list **b, t_move *move)
@@ -16,6 +28,7 @@ void	move_case_one(t_list **a, t_list **b, t_move *move)
 	}
 	pb(a, b);
 }
+
 void	move_case_two(t_list **a, t_list **b, t_move *move)
 {
 	while (*a != move->target_a)
@@ -37,7 +50,7 @@ void	move_case_three(t_list **a, t_list **b, t_move *move)
 void	move_case_four(t_list **a, t_list **b, t_move *move)
 {
 	while (*a != move->target_a && *b != move->target_b)
-			rrr(a, b);
+		rrr(a, b);
 	if (*a == move->target_a)
 	{
 		while (*b != move->target_b)
