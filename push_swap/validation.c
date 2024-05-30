@@ -6,7 +6,7 @@
 /*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 15:56:29 by volivier          #+#    #+#             */
-/*   Updated: 2024/05/24 13:43:36 by volivier         ###   ########.fr       */
+/*   Updated: 2024/05/30 17:20:07 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char	**ft_validate(int ac, char **av)
 		mat = ft_split(av[1], 32);
 	else
 		mat = get_av(ac, av);
-	if (check_list(mat) == 0 || check_dup(mat) == 0)
+	if (!mat[0] || !av[1][0] || check_list(mat) == 0 || check_dup(mat) == 0)
 	{
 		free_mat(mat);
 		return (NULL);
