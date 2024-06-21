@@ -6,10 +6,9 @@
 /*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:39:40 by volivier          #+#    #+#             */
-/*   Updated: 2024/06/20 16:18:30 by volivier         ###   ########.fr       */
+/*   Updated: 2024/06/22 00:12:52 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include <unistd.h>
 #include "printf/ft_printf.h"
@@ -41,16 +40,16 @@ int	ft_atoi(const char *str)
 	return (sign * res);
 }
 
-void    send_signal(char c, int pid)//sends the single bits starting from the MSB
+void	send_signal(char c, int pid)
 {
 	int	i;
 	int	shifted_c;
-	
+
 	i = 7;
-	while (i >= 0) //for each bit
+	while (i >= 0)
 	{
-		shifted_c = c>>i; //moves the bit i'm interested in to the LSB position
-		if (shifted_c & 1 == 1) //the bitwise & operator checks LSB
+		shifted_c = c >> i;
+		if ((shifted_c & 1) == 1)
 			kill(pid, SIGUSR1);
 		else
 			kill(pid, SIGUSR2);
@@ -59,36 +58,36 @@ void    send_signal(char c, int pid)//sends the single bits starting from the MS
 	}
 }
 
-void    confirmation(int signal)
+void	confirmation(int signal)
 {
-    if (signal == SIGUSR1)
-        ft_printf("Server received 1\n");
-    else if (signal == SIGUSR2)
-        ft_printf("Server received 0\n");
+	if (signal == SIGUSR1)
+		ft_printf("Server received 1\n");
+	else if (signal == SIGUSR2)
+		ft_printf("Server received 0\n");
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	int		pid;
 	int		i;
 	char	*string;
-	
-    signal(SIGUSR1, confirmation);
-    signal(SIGUSR2, confirmation);
-	if (ac != 3)//program name, PID, string to be sent
+
+	signal(SIGUSR1, confirmation);
+	signal(SIGUSR2, confirmation);
+	if (ac != 3)
 	{
 		if (ac > 3)
 			ft_printf("Too many arguments");
 		else if (ac < 3)
 			ft_printf("Too few arguments");
-		return (0); 
+		return (0);
 	}
 	pid = ft_atoi(av[1]);
-    if (pid <= 0)
-        return (1);
+	if (pid <= 0)
+		return (1);
 	string = av[2];
 	i = 0;
-	while (string[i]) //for each character
+	while (string[i])
 	{
 		send_signal(string[i], pid);
 		i++;

@@ -6,7 +6,7 @@
 #    By: volivier <volivier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/20 12:41:00 by volivier          #+#    #+#              #
-#    Updated: 2024/06/20 16:13:15 by volivier         ###   ########.fr        #
+#    Updated: 2024/06/22 00:20:44 by volivier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ CLIENT_BONUS_OBJS = $(CLIENT_BONUS_SRCS:.c=.o)
 SERVER_BONUS_OBJS = $(SERVER_BONUS_SRCS:.c=.o)
 PRINTF = ./printf/libftprintf.a
 
-all: $(CLIENT) $(SERVER) $(CLIENT_BONUS) $(SERVER_BONUS)
+all: $(CLIENT) $(SERVER)
 
 $(CLIENT): $(CLIENT_OBJS) $(PRINTF)
 	$(CC) $(CFLAGS) $(CLIENT_OBJS) $(PRINTF) -g -o client
@@ -46,9 +46,11 @@ $(SERVER_BONUS): $(SERVER_BONUS_OBJS) $(PRINTF)
 	$(CC) $(FLAGS) -g -c $< -o $(<:.c=.o)
 
 clean:
-	rm -f $(CLIENT_OBJS) $(SERVER_OBJS)
+	rm -f $(CLIENT_OBJS) $(SERVER_OBJS) $(CLIENT_BONUS_OBJS) $(SERVER_BONUS_OBJS)
 
 fclean: clean
-	rm -f $(CLIENT_PROGRAM_NAME) $(SERVER_PROGRAM_NAME)
+	rm -f $(CLIENT) $(SERVER) $(CLIENT_BONUS) $(SERVER_BONUS)
 
 re: fclean all
+
+.PHONY: all clean fclean re .c.o
