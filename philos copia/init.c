@@ -6,12 +6,22 @@
 /*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 17:12:49 by volivier          #+#    #+#             */
-/*   Updated: 2024/09/25 18:08:36 by volivier         ###   ########.fr       */
+/*   Updated: 2024/09/26 23:11:25 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philos.h"
 
+int	get_time()
+{
+	struct timeval	*tv;
+	if ((gettimeofday(tv, NULL)) == -1)
+	{
+		printf("Error with gettimeofday\n");
+		return(-1);
+	}
+	return (tv->tv_sec);
+}
 
 int	init_forks(t_forks *forks, int num)
 {
@@ -59,11 +69,12 @@ int	init_philos(t_philos *philos, t_forks *forks, char **av)
 }
 int	init_data(t_data *data, char **av)
 {
-	int	num_philos;
+	int		num_philos;
+	struct	timeval	*tv;
 
 	num_philos = ft_atoi(av[1]);
 	data->end_of_sim = 0;
-	//data->start_of_sim = gettimeofday(); // LEARN HOW TO USE THE FUNCTION
+	data->start_of_sim = get_time(); // LEARN HOW TO USE THE FUNCTION
 	data->philos = malloc(sizeof(t_philos) * num_philos); //creates an empty array of philos
 	data->forks = malloc(sizeof(t_forks) * num_philos); //creates an empty array of forks
 	if (data->forks == NULL || data->philos == NULL)
