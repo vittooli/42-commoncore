@@ -6,14 +6,14 @@
 /*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 16:43:48 by volivier          #+#    #+#             */
-/*   Updated: 2024/09/18 19:46:17 by volivier         ###   ########.fr       */
+/*   Updated: 2024/09/25 17:56:56 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philos.h"
 #include <stdio.h>
 
-int	check_input(char **av) //verifica che gli argomenti siano degli interi
+int	check_input1(char **av) //verify of the arguments are integers
 {
 	int	i;
 	int	j;
@@ -22,36 +22,65 @@ int	check_input(char **av) //verifica che gli argomenti siano degli interi
 	while (av[i])
 	{
 		j = 0;
-		while(av[i][j] == ' ')
+		while(av[i][j] == ' ') //maybe change into a function that check for all types of spaces
 			j++;
 		while (av[i][j] >= 48 && av[i][j] <= 57)
 			j++;
 		while (av[i][j] == ' ')
 			j++;
 		if (av[i][j])
-			return (0);
+			return (1);
 		i++;
 	}
-	return (1);
+	return (0);
+}
+
+int	check_input2(char **av)
+{
+	int i;
+
+	i = 2;
+	if (ft_atoi(av[1]) < 0 || ft_atoi(av[1]) > 199)
+		return (1);
+	while (av[i])
+	{
+		if (ft_atoi(av[i]) <= 0 || ft_atoi(av[i]) > MAX_INT)
+			return (1);
+		i++;
+	}
+	return (0);
 }
 
 int	main(int ac, char **av)
 {
-	t_philos	*philos[100];
+	t_data		data;
 	
 	if (ac < 5 || ac > 6)
 	{
 		printf("wrong number of args\n");
 		return (0);
 	}
-	if (check_input(av) == 0)
+	if (check_input1(av) != 0 || check_input2(av) != 0)
 	{
 		printf("input not ok\n");
 		return (0);
 	}
-	init_philos(philos, av);
-	for (int j = 0; j < ft_atoi(av[1]); j++){
-		printf("input data:\n n_philos-> %d\n id-> %d\n", philos[j]->n_philos, philos[j]->id);
+	if (init_data(&data, av) != 0) //initializes data, philos structs and forks struct
+		return (0);
+	create_threads(data.philos); 
+	/* printf("ecco gli id delle forchette: ");
+	int j = 0;
+	while (j < ft_atoi(av[1]))
+	{
+		printf("%d ", data.forks[j].id);
+		j++;
 	}
+	printf("ecco gli id dei filosofi: ");
+	j = 0;
+	while (j < ft_atoi(av[1]))
+	{
+		printf("%d ", data.philos[j].id);
+		j++;
+	} */
 	return (0);
 }

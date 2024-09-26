@@ -6,28 +6,29 @@
 /*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 18:15:42 by volivier          #+#    #+#             */
-/*   Updated: 2024/09/18 19:46:56 by volivier         ###   ########.fr       */
+/*   Updated: 2024/09/26 15:17:51 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philos.h"
 
-void	*routine();
-
-int	create_threads(t_philos	*philos)
+int	create_threads(t_philos	*philos) //starts the threads and joins them (which means the threads start executing in parallel)
 {
 	int i;
 
 	i = 0;
-	while (i++ < philos[i].n_philos)
+	while (i < philos[i].n_philos)
 	{
-		if (pthread_create(&philos[i].thread, NULL, &routine, NULL) != 0)
+		if (pthread_create(&philos[i].thread, NULL, &routine, ) != 0)
 			return (1);
+		i++;
 	}
 	i = 0;
-	while (i++ < philos[i].n_philos)
+	while (i < philos[i].n_philos)
 	{
 		if (pthread_join(philos[i].thread, NULL) != 0)
 			return (1);
+		i++;
 	}
+	return (0);
 }
