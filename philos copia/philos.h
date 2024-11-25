@@ -6,7 +6,7 @@
 /*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 17:13:14 by volivier          #+#    #+#             */
-/*   Updated: 2024/09/26 15:20:45 by volivier         ###   ########.fr       */
+/*   Updated: 2024/11/25 12:58:25 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ typedef	struct s_forks
 	pthread_mutex_t	mutex;
 	int				id;
 	int				busy;
+	int				philo_id;
+	int				single;
 }t_forks;
 
 
@@ -35,13 +37,14 @@ typedef struct s_philos
 {
 	int			id;
 	int			n_philos;
-	int			time_to_die;
-	int			time_to_sleep;
-	int			time_to_eat;
+	size_t		time_to_die;
+	size_t		time_to_sleep;
+	size_t		time_to_eat;
 	int			n_meals; //a number or a flag (-1) which idicates there is no specified limit
-	int			last_meal_time;
+	size_t		last_meal_time;
 	int			full;
 	int			dead;
+	size_t		start_of_sim;
 	t_forks		first_fork;
 	t_forks		second_fork;
 	pthread_t	thread;
@@ -52,7 +55,6 @@ typedef struct s_data
 {
 	t_philos	*philos; //array of philosophers
 	t_forks		*forks; //array of forks;
-	long		start_of_sim;
 	int			end_of_sim; //flag
 	
 }t_data;
@@ -64,7 +66,8 @@ int	init_forks(t_forks *forks, int num);
 int	create_threads(t_philos	*philos);
 
 //dinner
-void	*routine();
+void	*routine(void *pointer);
+size_t	get_time(void);
 
 //utils
 int	ft_atoi(const char *str);

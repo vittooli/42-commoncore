@@ -6,7 +6,7 @@
 /*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 16:43:48 by volivier          #+#    #+#             */
-/*   Updated: 2024/09/25 17:56:56 by volivier         ###   ########.fr       */
+/*   Updated: 2024/11/25 12:44:26 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,20 +67,7 @@ int	main(int ac, char **av)
 	}
 	if (init_data(&data, av) != 0) //initializes data, philos structs and forks struct
 		return (0);
-	create_threads(data.philos); 
-	/* printf("ecco gli id delle forchette: ");
-	int j = 0;
-	while (j < ft_atoi(av[1]))
-	{
-		printf("%d ", data.forks[j].id);
-		j++;
-	}
-	printf("ecco gli id dei filosofi: ");
-	j = 0;
-	while (j < ft_atoi(av[1]))
-	{
-		printf("%d ", data.philos[j].id);
-		j++;
-	} */
+	//printf("timestamp: %li\n", timestamp);
+	create_threads(data.philos); //threads created and running in parallel
 	return (0);
 }
