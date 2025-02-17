@@ -6,7 +6,7 @@
 /*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 16:50:07 by volivier          #+#    #+#             */
-/*   Updated: 2024/11/25 12:39:54 by volivier         ###   ########.fr       */
+/*   Updated: 2025/02/17 17:39:09 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,15 @@ size_t	get_time(void)
 		write(2, "gettimeofday() error\n", 22);
 	ret = time.tv_sec * 1000 + time.tv_usec / 1000;
 	return (ret);
+}
+
+int	is_dead(t_philos *philos)
+{
+	if ((get_time() - philos->last_meal_time) >= philos->time_to_die)
+	{
+		philos->dead = 1;
+		printf("%li %d died\n", get_time() - philos->start_of_sim, philos->id);
+		return (1);
+	}
+	return (0);
 }

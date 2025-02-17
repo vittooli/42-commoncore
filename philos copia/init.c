@@ -6,32 +6,35 @@
 /*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 17:12:49 by volivier          #+#    #+#             */
-/*   Updated: 2024/11/25 13:21:15 by volivier         ###   ########.fr       */
+/*   Updated: 2025/02/17 17:04:37 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philos.h"
 
-int	init_forks(t_forks *forks, int num)
+int	init_forks(t_forks **forks, int num)
 {
 	int	i;
 
 	i = 0;
 	while (i < num)
 	{
-		pthread_mutex_init(&forks[i].mutex, NULL);
-		forks[i].id = i + 1;
-		forks[i].busy = 0;
+		//pthread_mutex_init(&forks[i]->mutex, NULL);
+		if (pthread_mutex_init(&forks[i]->mutex, NULL) != 0)
+			return (1);
+		printf("Initializing fork %d\n", i + 1);
+		forks[i]->id = i + 1;
+		forks[i]->busy = 0;
 		if (num == 1)
-			forks[i].single = 1;
+			forks[i]->single = 1;
 		else
-			forks[i].single = 0;
+			forks[i]->single = 0;
 		i++;
 	}
 	return (0);
 }
 
-int	init_philos(t_philos *philos, t_forks *forks, char **av)
+int	init_philos(t_philos *philos, t_forks **forks, char **av)
 {
 	int	i;
 
@@ -53,7 +56,7 @@ int	init_philos(t_philos *philos, t_forks *forks, char **av)
 		else
 			philos[i].second_fork = forks[i + 1];
 		if (av[5])
-			philos[i].n_meals = 0;
+			philos[i].n_meals = ft_atoi(av[5]);
 		else
 			philos[i].n_meals = -1;
 		i++;
@@ -66,19 +69,47 @@ int	init_philos(t_philos *philos, t_forks *forks, char **av)
 int	init_data(t_data *data, char **av)
 {
 	int		num_philos;
+	int		i;
 
 	num_philos = ft_atoi(av[1]);
 	data->end_of_sim = 0;
 	data->philos = malloc(sizeof(t_philos) * num_philos); //creates an empty array of philos
-	data->forks = malloc(sizeof(t_forks) * num_philos); //creates an empty array of forks
-	if (data->forks == NULL || data->philos == NULL)
+	if (!data->philos)
 	{
-		printf("Malloc error with data\n");
-		free(data->philos);
-		free(data->forks);
+		printf("Malloc error for philosophers\n");
 		return (1);
 	}
-	init_forks(data->forks, num_philos);
-	init_philos(data->philos, data->forks, av);
+	data->forks = malloc(sizeof(t_forks *) * num_philos); //creates an empty array of forks
+	if (!data->forks)
+	{
+		printf("Malloc error for forks array\n");
+		free(data->philos);
+		return (1);
+	}
+	i = 0;
+	while (i < num_philos)
+	{
+		data->forks[i] = malloc(sizeof(t_forks));
+		if (!data->forks[i])
+		{
+			printf("Malloc error for fork %d\n", i + 1);
+			while (i-- > 0)
+				free(data->forks[i]);
+			free(data->forks);
+			free(data->philos);
+			return (1);
+		}
+		i++;
+	}
+	if (init_forks(data->forks, num_philos))
+	{
+		printf("Initialization error for forks\n");
+		return (1);
+	}
+	if (init_philos(data->philos, data->forks, av))
+	{
+		printf("Initialization error for philosophers\n");
+		return (1);
+	}
 	return (0);
 }

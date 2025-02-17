@@ -6,7 +6,7 @@
 /*   By: volivier <volivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 17:13:14 by volivier          #+#    #+#             */
-/*   Updated: 2024/11/25 12:58:25 by volivier         ###   ########.fr       */
+/*   Updated: 2025/02/17 17:48:00 by volivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,31 +45,36 @@ typedef struct s_philos
 	int			full;
 	int			dead;
 	size_t		start_of_sim;
-	t_forks		first_fork;
-	t_forks		second_fork;
+	t_forks		*first_fork;
+	t_forks		*second_fork;
 	pthread_t	thread;
+	int			someone_died;
 	
 }t_philos;
 
 typedef struct s_data
 {
 	t_philos	*philos; //array of philosophers
-	t_forks		*forks; //array of forks;
+	t_forks		**forks; //array of forks;
 	int			end_of_sim; //flag
 	
 }t_data;
 
 //initialise structs
-int	init_philos(t_philos *philos, t_forks *forks, char **av);
-int	init_data(t_data *data, char **av);
-int	init_forks(t_forks *forks, int num);
-int	create_threads(t_philos	*philos);
+int		init_philos(t_philos *philos, t_forks **forks, char **av);
+int		init_data(t_data *data, char **av);
+int		init_forks(t_forks **forks, int num);
+
 
 //dinner
 void	*routine(void *pointer);
 size_t	get_time(void);
 
 //utils
-int	ft_atoi(const char *str);
+int		ft_atoi(const char *str);
+
+int		create_threads(t_philos	*philos);
+int		is_dead(t_philos *philos);
+void	*monitor(void *pointer);
 
 #endif
